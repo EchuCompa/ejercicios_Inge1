@@ -16,6 +16,11 @@ next
 	^II! !
 
 
+!I class methodsFor: 'errors' stamp: 'EC 9/1/2022 16:42:04'!
+negativeNumbersNotSupportedErrorDescription
+	^'Negative numbers not supported'! !
+
+
 !I class methodsFor: 'operations' stamp: 'EC 8/26/2022 14:19:08'!
 * aMultiplicand
 	^aMultiplicand! !
@@ -25,10 +30,10 @@ next
 
 	^anAdder next! !
 
-!I class methodsFor: 'operations' stamp: 'ARM 8/25/2022 21:55:45'!
+!I class methodsFor: 'operations' stamp: 'EC 9/1/2022 16:42:56'!
 - subtrahend
 
-	self error: 'subtrahend can not be greater than minuend'! !
+	self error: I negativeNumbersNotSupportedErrorDescription.! !
 
 !I class methodsFor: 'operations' stamp: 'EC 8/26/2022 14:55:05'!
 > aNumberToCompare
@@ -56,10 +61,27 @@ DenotativeObject subclass: #II
 II class
 	instanceVariableNames: 'next previous'!
 
-!II class methodsFor: 'next & previous' stamp: 'ARM 8/25/2022 21:23:42'!
+!II class methodsFor: 'next & previous' stamp: 'EC 9/1/2022 16:27:17'!
+nameOfNext2
+	(self name endsWith: 'CMXCIX') ifTrue:[^(self name withoutSuffix:'CMXCIX'), 'M'].
+	(self name endsWith: 'DCCCXCIX') ifTrue:[^(self name withoutSuffix:'DCCCXCIX'), 'CM'].
+	(self name endsWith: 'CDLXXXIX') ifTrue:[^(self name withoutSuffix:'CDLXXXIX'), 'D'].
+	(self name endsWith: 'CCCXCIX') ifTrue:[^(self name withoutSuffix:'CCCXCIX'), 'CD'].
+	(self name endsWith: 'XCIX') ifTrue:[^(self name withoutSuffix:'XCIX'), 'C'].
+	(self name endsWith: 'LXXXIX') ifTrue:[^(self name withoutSuffix:'LXXXIX'), 'XC'].
+	(self name endsWith: 'XLIX') ifTrue:[^(self name withoutSuffix:'XLIX'), 'L'].
+	(self name endsWith: 'XXXIX') ifTrue:[^(self name withoutSuffix:'XXXIX'), 'XL'].
+	(self name endsWith: 'IX') ifTrue:[^(self name withoutSuffix:'IX'), 'X'].
+	(self name endsWith: 'VIII') ifTrue:[^(self name withoutSuffix:'VIII'), 'IX'].
+	(self name endsWith: 'IV') ifTrue:[^(self name withoutSuffix:'IV'), 'V'].
+	(self name endsWith: 'III') ifTrue:[^(self name withoutSuffix:'III'), 'IV'].
+	
+	^self name , 'I'.! !
+
+!II class methodsFor: 'next & previous' stamp: 'EC 9/1/2022 16:23:37'!
 next
 	next ifNil:[
-		next _ II createChildNamed: self name , 'I'.
+		next _ II createChildNamed: self nameOfNext2.
 		next previous: self.
 		].
 	^next! !
@@ -101,8 +123,9 @@ removeAllNext
 	
 	^(subtrahend restaAlReves: self).! !
 
-!II class methodsFor: 'operations' stamp: 'EC 8/26/2022 15:06:50'!
+!II class methodsFor: 'operations' stamp: 'EC 9/1/2022 16:44:34'!
 / aDivisor
+	( aDivisor > self) ifTrue: [self error: self canNotDivideByBiggerNumberErrorDescription ].
 	(aDivisor = I) ifTrue: [^self].
 	( (self > aDivisor) & (aDivisor * II > self) ) ifTrue: [^I].
 	^ I + ( (self - aDivisor) / (aDivisor) ).! !
@@ -123,99 +146,16 @@ restaAlReves: numeroAlCualLeResto
 	^self previous restaAlReves: numeroAlCualLeResto previous.! !
 
 
-!II class methodsFor: '--** private fileout/in **--' stamp: 'EC 8/26/2022 15:16:45'!
-initializeCollaboratorsFromFile
-	"Auto generated method for loading purposes - Do not modify it"
+!II class methodsFor: 'errors' stamp: 'EC 9/1/2022 16:44:09'!
+canNotDivideByBiggerNumberErrorDescription
+	^'Can''t divide by bigger number'! !
 
-	next := III.
-	previous := I.! !
 
-
-!classDefinition: #III category: 'NaturalNumbers'!
-II subclass: #III
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'NaturalNumbers'!
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'III class' category: 'NaturalNumbers'!
-III class
-	instanceVariableNames: ''!
-
-!III class methodsFor: '--** private fileout/in **--' stamp: 'EC 8/26/2022 15:16:45'!
-initializeCollaboratorsFromFile
-	"Auto generated method for loading purposes - Do not modify it"
-
-	next := IIII.
-	previous := II.! !
-
-
-!classDefinition: #IIII category: 'NaturalNumbers'!
-II subclass: #IIII
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'NaturalNumbers'!
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'IIII class' category: 'NaturalNumbers'!
-IIII class
-	instanceVariableNames: ''!
-
-!IIII class methodsFor: '--** private fileout/in **--' stamp: 'EC 8/26/2022 15:16:45'!
-initializeCollaboratorsFromFile
-	"Auto generated method for loading purposes - Do not modify it"
-
-	next := IIIII.
-	previous := III.! !
-
-
-!classDefinition: #IIIII category: 'NaturalNumbers'!
-II subclass: #IIIII
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'NaturalNumbers'!
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'IIIII class' category: 'NaturalNumbers'!
-IIIII class
-	instanceVariableNames: ''!
-
-!IIIII class methodsFor: '--** private fileout/in **--' stamp: 'EC 8/26/2022 15:16:45'!
-initializeCollaboratorsFromFile
-	"Auto generated method for loading purposes - Do not modify it"
-
-	next := IIIIII.
-	previous := IIII.! !
-
-
-!classDefinition: #IIIIII category: 'NaturalNumbers'!
-II subclass: #IIIIII
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'NaturalNumbers'!
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'IIIIII class' category: 'NaturalNumbers'!
-IIIIII class
-	instanceVariableNames: ''!
-
-!IIIIII class methodsFor: '--** private fileout/in **--' stamp: 'EC 8/26/2022 15:16:45'!
+!II class methodsFor: '--** private fileout/in **--' stamp: 'EC 9/2/2022 10:35:14'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
 	next := nil.
-	previous := IIIII.! !
+	previous := I.! !
 
 II initializeAfterFileIn!
-III initializeAfterFileIn!
-IIII initializeAfterFileIn!
-IIIII initializeAfterFileIn!
-IIIIII initializeAfterFileIn!
