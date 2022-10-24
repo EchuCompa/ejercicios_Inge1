@@ -641,6 +641,11 @@ name
 initializeNamed: aName
 	self subclassResponsibility.! !
 
+
+!Account methodsFor: 'reporting' stamp: 'E 10/23/2022 23:27:57'!
+toBeReportedTo: aReport
+	^self subclassResponsibility.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'Account class' category: 'Portfolio-Solucion'!
@@ -774,9 +779,9 @@ signalCanNotAddAccount
 	self error: self class canNotAddAccountErrorMessage! !
 
 
-!Portfolio methodsFor: 'reporting' stamp: 's 10/23/2022 20:35:46'!
-toBeReportedTo: anAccountSummary
-	^anAccountSummary reportForPortfolio: self.
+!Portfolio methodsFor: 'reporting' stamp: 'E 10/23/2022 23:27:33'!
+toBeReportedTo: aReport
+	^aReport reportForPortfolio: self.
 									
 		! !
 
@@ -871,10 +876,10 @@ addedTo: aPortfolio
 	! !
 
 
-!ReceptiveAccount methodsFor: 'reporting' stamp: 's 10/23/2022 20:31:26'!
-toBeReportedTo:anAccountSummary
+!ReceptiveAccount methodsFor: 'reporting' stamp: 'E 10/23/2022 23:27:44'!
+toBeReportedTo: aReport
 
-	^anAccountSummary reportForReceptiveAccount: self .! !
+	^aReport reportForReceptiveAccount: self .! !
 
 
 !classDefinition: #AccountTransaction category: 'Portfolio-Solucion'!
@@ -896,8 +901,8 @@ affectBalance: aBalance
 	self subclassResponsibility ! !
 
 
-!AccountTransaction methodsFor: 'reporting' stamp: 's 10/23/2022 19:43:24'!
-toBeReportedTo: anAccountSummary 
+!AccountTransaction methodsFor: 'reporting' stamp: 'E 10/23/2022 23:28:15'!
+toBeReportedTo: aReport 
 	self subclassResponsibility .! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -945,9 +950,9 @@ affectBalance: aBalance
 	^aBalance + value ! !
 
 
-!Deposit methodsFor: 'reporting' stamp: 's 10/23/2022 19:42:43'!
-toBeReportedTo: anAccountSummary 
-	^anAccountSummary reportForADeposit: self value.! !
+!Deposit methodsFor: 'reporting' stamp: 'E 10/23/2022 23:28:24'!
+toBeReportedTo: aReport 
+	^aReport reportForADeposit: self value.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -991,9 +996,9 @@ value
 	^ transfer value.! !
 
 
-!DepositLeg methodsFor: 'as yet unclassified' stamp: 's 10/23/2022 19:42:43'!
-toBeReportedTo: anAccountSummary 
-		^anAccountSummary reportForADepositLeg: self value .! !
+!DepositLeg methodsFor: 'as yet unclassified' stamp: 'E 10/23/2022 23:28:30'!
+toBeReportedTo: aReport 
+		^aReport reportForADepositLeg: self value .! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1032,9 +1037,9 @@ affectBalance: aBalance
 	^aBalance - value! !
 
 
-!Withdraw methodsFor: 'reporting' stamp: 's 10/23/2022 19:42:43'!
-toBeReportedTo: anAccountSummary 
-	^anAccountSummary reportForAWithdraw: self value. ! !
+!Withdraw methodsFor: 'reporting' stamp: 'E 10/23/2022 23:28:38'!
+toBeReportedTo: aReport 
+	^aReport reportForAWithdraw: self value. ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1078,9 +1083,9 @@ value
 	^ transfer value.! !
 
 
-!WithdrawLeg methodsFor: 'reporting' stamp: 's 10/23/2022 19:42:43'!
-toBeReportedTo: anAccountSummary 
-	^anAccountSummary reportForAWithdrawLeg: self value. ! !
+!WithdrawLeg methodsFor: 'reporting' stamp: 'E 10/23/2022 23:28:43'!
+toBeReportedTo: aReport 
+	^aReport reportForAWithdrawLeg: self value. ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1191,8 +1196,10 @@ reportForPortfolio: aPortfolio
 									
 		! !
 
-!AccountSummary methodsFor: 'operations -private' stamp: 's 10/23/2022 20:32:07'!
+!AccountSummary methodsFor: 'operations -private' stamp: 'E 10/23/2022 23:30:56'!
 reportForReceptiveAccount: receptiveAccount
+
+	"Utilizamos el mensaje 'transactions' para no tener que pasar cómo parametro el nombre en el PortfolioTree"
 	^ receptiveAccount transactions collect:[ :transaction | transaction  toBeReportedTo: self.]
 									
 		! !
@@ -1210,9 +1217,11 @@ report
 	^account toBeReportedTo: self.! !
 
 
-!PortfolioTree methodsFor: 'operations -private' stamp: 's 10/23/2022 20:38:47'!
+!PortfolioTree methodsFor: 'operations -private' stamp: 'E 10/23/2022 23:32:16'!
 reportForPortfolio: aPortfolio 
 	| report |
+	
+	"Utilizamos el mensaje 'accounts' para no tener que pasar cómo parametro el nombre en el PortfolioTree"
 	report _ OrderedCollection with: (aPortfolio name) .
 	(aPortfolio accounts) ifNotEmpty: [  report add: ((aPortfolio accounts) collect: [ :accountOfPortfolio | accountOfPortfolio toBeReportedTo: self])].
 	^report.! !
@@ -1234,10 +1243,11 @@ report
 	^account toBeReportedTo: self.! !
 
 
-!SpecialPortfolioTree methodsFor: 'operations -private' stamp: 'E 10/23/2022 21:09:01'!
+!SpecialPortfolioTree methodsFor: 'operations -private' stamp: 'E 10/23/2022 23:32:07'!
 reportForPortfolio: aPortfolio 
 	| report |
-	report _ OrderedCollection with: (aPortfolio name) .
+	
+	report _ OrderedCollection with: (aPortfolio name).
 	(aPortfolio accounts) ifNotEmpty: [  report add: ((aPortfolio accounts) collect: [ :accountOfPortfolio | accountOfPortfolio toBeReportedTo: self])].
 	report add: 'Balance = ', aPortfolio balance asString.
 	^report.! !
@@ -1260,16 +1270,16 @@ Report subclass: #TransferNet
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
 
-!TransferNet methodsFor: 'operations -private' stamp: 's 10/23/2022 19:52:19'!
-reportForADeposit: aSmallInteger 
+!TransferNet methodsFor: 'operations -private' stamp: 'E 10/23/2022 23:29:13'!
+reportForADeposit: aValue 
 	^0.! !
 
 !TransferNet methodsFor: 'operations -private' stamp: 's 10/23/2022 19:51:56'!
 reportForADepositLeg: aValue 
 	^aValue .! !
 
-!TransferNet methodsFor: 'operations -private' stamp: 's 10/23/2022 19:52:39'!
-reportForAWithdraw: aSmallInteger 
+!TransferNet methodsFor: 'operations -private' stamp: 'E 10/23/2022 23:29:03'!
+reportForAWithdraw: aValue 
 	^0.! !
 
 !TransferNet methodsFor: 'operations -private' stamp: 's 10/23/2022 19:50:42'!
