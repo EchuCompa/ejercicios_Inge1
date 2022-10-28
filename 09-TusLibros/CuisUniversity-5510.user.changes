@@ -1,0 +1,1262 @@
+
+
+----QUIT----(26 October 2022 08:07:27) CuisUniversity-5510.image priorSource: 2900072!
+
+----STARTUP---- (26 October 2022 08:07:28) as /Users/hernan/Documents/Cuis/5.0-64Bits/Cuis-University-Installer/CuisUniversity-5510.image!
+
+
+----QUIT----(26 October 2022 08:07:28) CuisUniversity-5510.image priorSource: 7154921!
+
+----STARTUP---- (27 October 2022 20:32:26) as /home/clinux01/Descargas/linux64/CuisUniversity-5510.image!
+
+
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+
+!classDefinition: #Cart category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 20:35:33'!
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+
+!classDefinition: #CartTest category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 20:35:51'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!CartTest methodsFor: 'no messages' stamp: 'Simon 10/27/2022 20:36:59'!
+test01newCartIsEmpty
+	| cart |
+	cart := Cart new.
+	
+	self assert: cart isEmpty equals: true.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:37:00'!
+ERROR!
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 20:37:09'!
+isEmpty
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 20:37:16' prior: 50555285!
+isEmpty
+	^true.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:37:18'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:37:18'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:42:23'!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart |
+	cart := Cart new.
+	cart add: 1.
+	
+	self assert: cart isEmpty equals: true.! !
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:42:29'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 20:43:04'!
+add: aString 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 20:43:12' prior: 50555308!
+add: aISBN 
+	! !
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:43:13'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:43:13'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:43:13'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:43:19' prior: 50555298!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart |
+	cart := Cart new.
+	cart add: 1.
+	
+	self assert: cart isEmpty equals: false.! !
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:43:20'!
+FAILURE!
+
+Object subclass: #Cart
+	instanceVariableNames: 'isEmpty'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+
+!classDefinition: #Cart category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 20:44:24'!
+Object subclass: #Cart
+	instanceVariableNames: 'isEmpty'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 20:44:59' overrides: 16920235!
+initialize
+	isEmpty := false.! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 20:45:24' prior: 50555312!
+add: aISBN 
+	isEmpty := false.
+	! !
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 20:45:30' prior: 50555346 overrides: 16920235!
+initialize
+	isEmpty := true.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:45:31'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:45:31'!
+FAILURE!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:45:31'!
+FAILURE!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:45:48'!
+FAILURE!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:45:48'!
+FAILURE!
+
+----SNAPSHOT----(27 October 2022 20:47:19) CuisUniversity-5510.image priorSource: 7155150!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:47:46' prior: 50555325!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart |
+	cart := Cart new.
+	cart add: 1.
+	self assert: cart isEmpty equals: false.! !
+
+cart isEmpty!
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 20:48:37' prior: 50555289!
+isEmpty
+	^isEmpty .! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 20:48:38' prior: 50555385!
+isEmpty
+	^isEmpty.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:48:39'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:48:39'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:50:47'!
+test03cartCanNotAddInvalidISBN
+	| cart |
+	cart := Cart new.
+	cart add: 1.
+	self assert: cart isEmpty equals: false.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:52:06' prior: 50555378!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart bookISBN |
+	cart := Cart new.
+	bookISBN := 1.
+	cart add: 1.
+	self assert: cart isEmpty equals: false.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:52:18' prior: 50555405!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart bookISBN |
+	cart := Cart new.
+	bookISBN := 1.
+	cart add: bookISBN.
+	self assert: cart isEmpty equals: false.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:52:28' prior: 50555413!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart bookISBN |
+	cart := Cart new.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:52:48' prior: 50555398!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart new.
+	bookISBN := 7.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+
+!classDefinition: #CartTest category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 20:55:42'!
+TestCase subclass: #CartTest
+	instanceVariableNames: 'category'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!CartTest methodsFor: 'setUp' stamp: 'Simon 10/27/2022 20:55:40' overrides: 16961394!
+setUp
+	category := {1. 2. 3. 4. 5. 6. 8. 9}! !
+
+!classDefinition: #CartTest category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 20:55:47'!
+TestCase subclass: #CartTest
+	instanceVariableNames: 'catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/27/2022 20:55:47' prior: 50555444 overrides: 16961394!
+setUp
+	catalog := {1. 2. 3. 4. 5. 6. 8. 9}! !
+!CartTest methodsFor: 'setUp' stamp: 'Simon 10/27/2022 20:55:53' prior: 50555457 overrides: 16961394!
+setUp
+	catalog := {1. 2. 3. 4. 5. 6. 8. 9} asOrderedCollection ! !
+
+{1. 2. 3. 4. 5. 6. 8. 9} asOrderedCollection !
+!CartTest methodsFor: 'setUp' stamp: 'Simon 10/27/2022 20:56:04' prior: 50555462 overrides: 16961394!
+setUp
+	catalog := {1. 2. 3. 4. 5. 6.} asOrderedCollection ! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:57:07' prior: 50555429!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart new.
+	bookISBN := 7.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:57:32' prior: 50555474!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 20:57:35'!
+ERROR!
+!Cart class methodsFor: 'instance creation' stamp: 'Simon 10/27/2022 20:57:45'!
+withCatalog: anOrderedCollection 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithCatalog: anOrderedCollection ! !
+!Cart class methodsFor: 'instance creation' stamp: 'Simon 10/27/2022 20:58:05' prior: 50555493!
+withCatalog: aBookCatalog 
+	^self new initializeWithCatalog: aBookCatalog. ! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 20:58:08'!
+ERROR!
+
+!classDefinition: #Cart category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 20:58:12'!
+Object subclass: #Cart
+	instanceVariableNames: 'isEmpty bookCatalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 20:58:12'!
+initializeWithCatalog: aBookCatalog 
+	self shouldBeImplemented.
+	bookCatalog := aBookCatalog.! !
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 20:58:18' prior: 50555517!
+initializeWithCatalog: aBookCatalog 
+	bookCatalog := aBookCatalog.! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 20:58:20'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 20:58:20'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 20:58:20'!
+PASSED!
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 20:58:20'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:58:51' prior: 50555482!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 20:58:55' prior: 50555540!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: true.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:00:29' prior: 50555548!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+	
+	
+	self assert: cart isEmpty equals: true.! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:00:34'!
+ERROR!
+!Cart class methodsFor: 'errors' stamp: 'Simon 10/27/2022 21:00:44'!
+invalidBookerrorDescription
+	self shouldBeImplemented.! !
+!Cart class methodsFor: 'errors' stamp: 'Simon 10/27/2022 21:02:03' prior: 50555570!
+invalidBookerrorDescription
+	self error: 'Cannot add book that is not in catalog.'! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:02:05'!
+ERROR!
+!Cart class methodsFor: 'errors' stamp: 'Simon 10/27/2022 21:02:24' prior: 50555575!
+invalidBookerrorDescription
+	self error: 'Cannot add book that is not in catalog.'! !
+!Cart class methodsFor: 'errors' stamp: 'Simon 10/27/2022 21:02:36' prior: 50555584!
+invalidBookerrorDescription
+	^self error: 'Cannot add book that is not in catalog.'! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:02:38'!
+ERROR!
+!Cart class methodsFor: 'errors' stamp: 'Simon 10/27/2022 21:02:48' prior: 50555590!
+invalidBookerrorDescription
+	^'Cannot add book that is not in catalog.'! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:02:49'!
+FAILURE!
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:02:59'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:03:38' prior: 50555350!
+add: aISBN 
+	
+	isEmpty := false.
+	! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:04:53' prior: 50555610!
+add: anISBN 
+	(bookCatalog includes: anISBN ) ifTrue: [ ^self error: self class invalidBookerrorDescription.].
+	isEmpty := false.
+	! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:05:01' prior: 50555614!
+add: anISBN 
+	(bookCatalog includes: anISBN ) ifFalse: [ ^self error: self class invalidBookerrorDescription.].
+	isEmpty := false.
+	! !
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:05:02'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:05:02'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:05:02'!
+ERROR!
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:05:02'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:05:02'!
+ERROR!
+
+bookCatalog!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:05:42' prior: 50555421!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart bookISBN |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:05:43'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:05:43'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:05:43'!
+PASSED!
+
+!testRun: #CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:05:43'!
+PASSED!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:09:17' prior: 50555621!
+add: anISBN 
+	(bookCatalog includes: anISBN ) ifFalse: [ self error: self class invalidBookerrorDescription.].
+	isEmpty := false.
+	! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:09:42' prior: 50555665!
+add: anISBN 
+	(bookCatalog includes: anISBN ) ifFalse: [ self error: self class invalidBookerrorDescription].
+	isEmpty := false.
+	! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:09:53' prior: 50555672!
+add: anISBN 
+	
+	isEmpty := false.
+	! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:10:53'!
+raiseErrorIfNotInCatalog: anISBN
+	(bookCatalog includes: anISBN ) ifFalse: [^self error: self class invalidBookerrorDescription].! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:11:12' prior: 50555679!
+add: anISBN 
+	self raiseErrorIfNotInCatalog: anISBN.
+	isEmpty := false.
+	! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:12:46'!
+test05cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+	
+	
+	self assert: cart isEmpty equals: true.! !
+
+!methodRemoval: CartTest #test03cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:12:46'!
+test03cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+	
+	
+	self assert: cart isEmpty equals: true.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:15:08'!
+test03cartWithOneProductHasOnlyOneProduct
+	| cart bookISBN |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: (cart quantityOf:  bookISBN) equals: 1.! !
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:15:14'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'Simon 10/27/2022 21:15:26'!
+quantityOf: bookISBN 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:15:35' prior: 50555729!
+quantityOf: bookISBN 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:15:43' prior: 50555734!
+quantityOf: bookISBN 
+	^1.! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:15:46' prior: 50555739!
+quantityOf: bookISBN 
+^1.! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:15:48' prior: 50555743!
+quantityOf: bookISBN 
+	^1.! !
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:15:49'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:15:49'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:15:49'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:15:49'!
+PASSED!
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:15:49'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:16:47'!
+test04cartWithManyProductsHasRegisteredTheirQuantites
+	| cart bookISBN |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: (cart quantityOf:  bookISBN) equals: 1.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:17:57' prior: 50555766!
+test04cartWithManyProductsHasRegisteredTheirQuantites
+	| cart bookISBN |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: 5 times: bookISBN.
+	
+	self assert: (cart quantityOf:  bookISBN) equals: 1.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:18:50' prior: 50555776!
+test04cartWithManyProductsHasRegisteredTheirQuantites
+	| cart bookISBN1 bookISBN2 |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	
+	self assert: (cart quantityOf:  bookISBN1) equals: 5.
+	self assert: (cart quantityOf:  bookISBN2) equals: 4.! !
+
+!classDefinition: #Cart category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 21:20:16'!
+Object subclass: #Cart
+	instanceVariableNames: 'isEmpty bookCatalog contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 21:20:12' prior: 50555355 overrides: 16920235!
+initialize
+	isEmpty := true.
+	contents := Dictionary new.! !
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:20:48'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:20:48'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:20:48'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:20:48'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:20:48'!
+ERROR!
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:20:48'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:20:48'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:20:54'!
+add: aString times: bookISBN2 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:22:18' prior: 50555835!
+add: aQuantity times: anISBN 
+	self raiseErrorIfNotInCatalog: anISBN.
+	contents at: anISBN put: aQuantity.! !
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:22:20'!
+FAILURE!
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:22:45' prior: 50555747!
+quantityOf: bookISBN 
+	^contents at: bookISBN.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:22:46'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:22:46'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:22:46'!
+ERROR!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:22:46'!
+PASSED!
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:22:46'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:22:46'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:23:31' prior: 50555840!
+add: aQuantity times: anISBN 
+	self raiseErrorIfNotInCatalog: anISBN.
+	contents at: anISBN put: aQuantity.! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:23:51' prior: 50555690!
+add: anISBN 
+	self add: 1 times: anISBN.
+	! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:23:53'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:23:53'!
+FAILURE!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:23:53'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:23:53'!
+PASSED!
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:23:53'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:23:53'!
+FAILURE!
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:24:07' prior: 50555389!
+isEmpty
+	^contents isEmpty.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:24:09'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:24:09'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:24:09'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:24:09'!
+PASSED!
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:24:09'!
+PASSED!
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 21:24:26' prior: 50555808 overrides: 16920235!
+initialize
+	contents := Dictionary new.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:24:37'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:24:37'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:24:37'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:24:37'!
+PASSED!
+
+!testRun: #CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:24:37'!
+PASSED!
+
+!classDefinition: #Cart category: 'TusLibrosIt1' stamp: 'Simon 10/27/2022 21:24:42'!
+Object subclass: #Cart
+	instanceVariableNames: 'bookCatalog contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosIt1'!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:24:53' prior: 50555695!
+test05cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:25:01'!
+test07cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+
+!methodRemoval: CartTest #test05cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:25:01'!
+test05cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:27:10'!
+test08cartCanNotAddANonPositiveAmountOfBooks
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: 0 times: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:27:12'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:27:28'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:27:51' prior: 50555986!
+test08cartCanNotAddANonPositiveAmountOfBooks
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: 0 times: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:27:54' prior: 50556025!
+test08cartCanNotAddANonPositiveAmountOfBooks
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 4.
+	
+	self  should: [cart add: 0 times: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:27:56'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:28:15' prior: 50556037!
+test08cartCanNotAddANonPositiveAmountOfBooks
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 4.
+	
+	self  should: [cart add: 0 times: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidAmountErrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+!Cart methodsFor: 'initialize' stamp: 'Simon 10/27/2022 21:31:00' prior: 50555925 overrides: 16920235!
+initialize
+	contents := Bag new.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:31:03'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:31:03'!
+ERROR!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:31:03'!
+ERROR!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:31:03'!
+ERROR!
+
+!testRun: #CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:31:03'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:31:03'!
+ERROR!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:31:06'!
+ERROR!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/TerseGuide.pck.st----!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:32:08' prior: 50555874!
+add: aQuantity times: anISBN 
+	self raiseErrorIfNotInCatalog: anISBN.
+	contents add: anISBN withOccurrences: aQuantity.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:32:10'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:32:10'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:32:10'!
+ERROR!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:32:10'!
+ERROR!
+
+!testRun: #CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:32:10'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:32:10'!
+ERROR!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:32:12'!
+ERROR!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:32:19'!
+ERROR!
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:32:48' prior: 50555850!
+quantityOf: bookISBN 
+	^contents occurrencesOf: bookISBN.! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:32:57'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:32:57'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:32:57'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:32:57'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:32:57'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:32:57'!
+ERROR!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:32:57'!
+ERROR!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:33:00'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:33:00'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:33:00'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:33:00'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:33:00'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:33:00'!
+ERROR!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:33:00'!
+ERROR!
+!Cart class methodsFor: 'as yet unclassified' stamp: 'Simon 10/27/2022 21:33:14'!
+invalidAmountErrorDescription
+	self shouldBeImplemented.! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'Simon 10/27/2022 21:33:42' prior: 50559096!
+invalidAmountErrorDescription
+	^'Cannot add a book a negative amount of times'! !
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:33:44'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:34:19' prior: 50559012!
+add: aQuantity times: anISBN 
+	self raiseErrorIfNotInCatalog: anISBN.
+	self raiseErrorIfQuantityNotPositive: aQuantity.
+	contents add: anISBN withOccurrences: aQuantity.! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/27/2022 21:34:52'!
+raiseErrorIfQuantityNotPositive: aQuantity.
+	^self error: self class ! !
+!Cart methodsFor: 'exceptions' stamp: 'Simon 10/27/2022 21:36:17' prior: 50559118!
+raiseErrorIfQuantityNotPositive: aQuantity.
+	(aQuantity < 1) ifTrue: [^self error: self class invalidAmountErrorDescription ]! !
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:36:27'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:36:27'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:36:27'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:36:27'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:36:27'!
+PASSED!
+
+!testRun: #CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:36:27'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:37:20'!
+test06cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+
+!methodRemoval: CartTest #test07cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:37:20'!
+test07cartCanNotAddInvalidISBN
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 7.
+	
+	self  should: [cart add: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidBookerrorDescription.
+
+	self assert: cart isEmpty equals: true.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:37:26'!
+test07cartCanNotAddANonPositiveAmountOfBooks
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 4.
+	
+	self  should: [cart add: 0 times: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidAmountErrorDescription.
+
+	self assert: cart isEmpty equals: true.! !
+
+!methodRemoval: CartTest #test08cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:37:26'!
+test08cartCanNotAddANonPositiveAmountOfBooks
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 4.
+	
+	self  should: [cart add: 0 times: bookISBN.] 
+		raise:  Error
+		withMessageText: cart class invalidAmountErrorDescription.
+
+	self assert: cart isEmpty equals: true.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:39:26'!
+test05cartWithManyProductsKnowsTheirISBN
+	| cart bookISBN1 bookISBN2 bookISBN3 |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	bookISBN3 := 3.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	cart add: 2 times: bookISBN3.
+	
+	self assert: (cart contents ) equals: 1.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:39:34' prior: 50559195!
+test05cartWithManyProductsKnowsTheirISBN
+	| cart bookISBN1 bookISBN2 bookISBN3 |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	bookISBN3 := 3.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	cart add: 2 times: bookISBN3.
+	
+	self assert: (cart content ) equals: 1.! !
+
+{1. 2. 3}!
+
+{1. 2. 3} asSet!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:40:08' prior: 50559208!
+test05cartWithManyProductsKnowsTheirISBN
+	| cart bookISBN1 bookISBN2 bookISBN3 |
+	cart := cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	bookISBN3 := 3.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	cart add: 2 times: bookISBN3.
+	
+	self assert: (cart content ) equals: {1. 2. 3} asSet.! !
+
+----SNAPSHOT----(27 October 2022 21:40:22) CuisUniversity-5510.image priorSource: 7159170!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:40:33'!
+ERROR!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:40:33'!
+ERROR!
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:40:44'!
+content
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accesing' stamp: 'Simon 10/27/2022 21:40:52' prior: 50559244!
+content
+	^contents asSet.! !
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:40:54'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:40:56'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:41:54'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:42:25' prior: 50559222!
+test05cartWithManyProductsKnowsTheirISBN
+	| cart bookISBN1 bookISBN2 bookISBN3 |
+	cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	bookISBN3 := 3.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	cart add: 2 times: bookISBN3.
+	
+	self assert: (cart content ) equals: {1. 2. 3} asSet.! !
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:42:26'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:42:30' prior: 50555786!
+test04cartWithManyProductsHasRegisteredTheirQuantites
+	| cart bookISBN1 bookISBN2 |
+	cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	
+	self assert: (cart quantityOf:  bookISBN1) equals: 5.
+	self assert: (cart quantityOf:  bookISBN2) equals: 4.! !
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:42:31'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:42:36' prior: 50555717!
+test03cartWithOneProductHasOnlyOneProduct
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: (cart quantityOf:  bookISBN) equals: 1.! !
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:42:37'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:42:42' prior: 50555644!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:42:43'!
+PASSED!
+
+----SNAPSHOT----(27 October 2022 21:49:37) CuisUniversity-5510.image priorSource: 7282696!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:50:51'!
+test02cartWithOneAddedBookIsNotEmpty
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.! !
+
+!methodRemoval: CartTest #test02cartWithOneAddedProductIsNotEmpty stamp: 'Simon 10/27/2022 21:50:51'!
+test02cartWithOneAddedProductIsNotEmpty
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: cart isEmpty equals: false.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:51:05'!
+test03cartWithOneBookHasOnlyOneBook
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: (cart quantityOf:  bookISBN) equals: 1.! !
+
+!methodRemoval: CartTest #test03cartWithOneProductHasOnlyOneProduct stamp: 'Simon 10/27/2022 21:51:05'!
+test03cartWithOneProductHasOnlyOneProduct
+	| cart bookISBN |
+	cart := Cart withCatalog: catalog.
+	bookISBN := 1.
+	cart add: bookISBN.
+	
+	self assert: (cart quantityOf:  bookISBN) equals: 1.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:51:13'!
+test04cartWithManyBookHasRegisteredTheirQuantites
+	| cart bookISBN1 bookISBN2 |
+	cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	
+	self assert: (cart quantityOf:  bookISBN1) equals: 5.
+	self assert: (cart quantityOf:  bookISBN2) equals: 4.! !
+
+!methodRemoval: CartTest #test04cartWithManyProductsHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:51:13'!
+test04cartWithManyProductsHasRegisteredTheirQuantites
+	| cart bookISBN1 bookISBN2 |
+	cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	
+	self assert: (cart quantityOf:  bookISBN1) equals: 5.
+	self assert: (cart quantityOf:  bookISBN2) equals: 4.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/27/2022 21:51:24'!
+test05cartWithManyBooksKnowsTheirISBN
+	| cart bookISBN1 bookISBN2 bookISBN3 |
+	cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	bookISBN3 := 3.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	cart add: 2 times: bookISBN3.
+	
+	self assert: (cart content ) equals: {1. 2. 3} asSet.! !
+
+!methodRemoval: CartTest #test05cartWithManyProductsKnowsTheirISBN stamp: 'Simon 10/27/2022 21:51:24'!
+test05cartWithManyProductsKnowsTheirISBN
+	| cart bookISBN1 bookISBN2 bookISBN3 |
+	cart := Cart withCatalog: catalog.
+	bookISBN1 := 1.
+	bookISBN2 := 2.
+	bookISBN3 := 3.
+	cart add: 5 times: bookISBN1.
+	cart add: 4 times: bookISBN2.
+	cart add: 2 times: bookISBN3.
+	
+	self assert: (cart content ) equals: {1. 2. 3} asSet.!
+
+!testRun: #CartTest #test01newCartIsEmpty stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneAddedBookIsNotEmpty stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithOneBookHasOnlyOneBook stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithManyBookHasRegisteredTheirQuantites stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithManyBooksKnowsTheirISBN stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+!testRun: #CartTest #test06cartCanNotAddInvalidISBN stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+!testRun: #CartTest #test07cartCanNotAddANonPositiveAmountOfBooks stamp: 'Simon 10/27/2022 21:51:32'!
+PASSED!
+
+----SNAPSHOT----(27 October 2022 21:51:45) CuisUniversity-5510.image priorSource: 7289564!
+
+----SNAPSHOT----(27 October 2022 21:51:51) CuisUniversity-5510.image priorSource: 7293172!
