@@ -1,0 +1,3610 @@
+
+
+----QUIT----(11 September 2022 19:10:09) CuisUniversity-5481.image priorSource: 2810882!
+
+----STARTUP---- (11 September 2022 19:10:10) as /Users/hernan/Documents/Cuis/5.0-64Bits/Cuis-University-Installer/CuisUniversity-5481.image!
+
+
+----QUIT----(11 September 2022 19:10:10) CuisUniversity-5481.image priorSource: 7059465!
+
+----STARTUP---- (31 October 2022 18:06:49) as /home/clinux01/Descargas/linux64/CuisUniversity-5481.image!
+
+
+----End fileIn of /home/clinux01/Descargas/TusLibros-18.st----!
+
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CashierTest category: 'TusLibros' stamp: 'Simon 10/31/2022 18:07:39'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'no messages' stamp: 'Simon 10/31/2022 18:08:28'!
+createCart
+	
+	^Cart acceptingItemsOf: self defaultCatalog! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:08:37'!
+defaultCatalog
+	
+	^ Array with: self itemSellByTheStore! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:10:24' prior: 50552473!
+defaultCatalog
+	
+	^ {'1'. '2'} asOrderedCollection! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:11:53' prior: 50552478!
+defaultCatalog
+	
+	^ {'1'. '2'. '3'} asOrderedCollection! !
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'Simon 10/31/2022 18:13:29'!
+Object subclass: #Cashier
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:13:23'!
+test01CanNotCheckoutEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := 2.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:13:44' prior: 50552494!
+test01CanNotCheckoutEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:15:47' prior: 50552500!
+test01CanNotCheckoutEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:17:15' prior: 50552506!
+test01CanNotCheckoutEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = cashier invalidCartErrorMessage.]! !
+
+!testRun: #CashierTest #test01CanNotCheckoutEmptyCart stamp: 'Simon 10/31/2022 18:17:24'!
+ERROR!
+!Cashier methodsFor: 'errors' stamp: 'Simon 10/31/2022 18:17:39'!
+invalidCartErrorMessage
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'errors' stamp: 'Simon 10/31/2022 18:18:23' prior: 50552528!
+invalidCartErrorMessage
+	^ 'Cashier cannot price an empty cart.'! !
+
+!testRun: #CashierTest #test01CanNotCheckoutEmptyCart stamp: 'Simon 10/31/2022 18:18:25'!
+FAILURE!
+
+!testRun: #CashierTest #test01CanNotCheckoutEmptyCart stamp: 'Simon 10/31/2022 18:18:33'!
+FAILURE!
+!Cashier class methodsFor: 'no messages' stamp: 'Simon 10/31/2022 18:19:16'!
+invalidCartErrorMessage
+	^ 'Cashier cannot price an empty cart.'! !
+
+!methodRemoval: Cashier #invalidCartErrorMessage stamp: 'Simon 10/31/2022 18:19:23'!
+invalidCartErrorMessage
+	^ 'Cashier cannot price an empty cart.'!
+!Cashier methodsFor: 'no messages' stamp: 'Simon 10/31/2022 18:19:53'!
+priceOf: aCart
+	^self error: self class invalidCartErrorMessage.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:20:07' prior: 50552514!
+test01CanNotCheckoutEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidCartErrorMessage.]! !
+
+!testRun: #CashierTest #test01CanNotCheckoutEmptyCart stamp: 'Simon 10/31/2022 18:20:08'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutEmptyCart stamp: 'Simon 10/31/2022 18:20:08'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:23:27'!
+test02CheckoutOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidCartErrorMessage.]! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:23:52'!
+test01CashierCanNotPriceEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidCartErrorMessage.]! !
+
+!methodRemoval: CashierTest #test01CanNotCheckoutEmptyCart stamp: 'Simon 10/31/2022 18:23:52'!
+test01CanNotCheckoutEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidCartErrorMessage.]!
+
+5 peso!
+
+5 * pesos!
+
+5 * peso!
+
+ 5 * pesos !
+
+ 5 * pesos !
+
+5 * peso!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:26:17' prior: 50552576!
+test02CheckoutOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidCartErrorMessage.]! !
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 18:29:03'!
+defaultPriceList
+	
+	^ Dictionary new at: '1' put: 1*peso; at: '2' put: 1*peso; at: '3' put: 3*peso! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:29:32' prior: 50552612!
+test02CheckoutOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:30:20'!
+test02PriceOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.! !
+
+!methodRemoval: CashierTest #test02CheckoutOfCartWithOneBook stamp: 'Simon 10/31/2022 18:30:23'!
+test02CheckoutOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 18:30:25'!
+ERROR!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 18:30:25'!
+ERROR!
+!Cashier class methodsFor: 'errors' stamp: 'Simon 10/31/2022 18:31:05'!
+invalidEmptyCartErrorMessage
+	^ 'Cashier cannot price an empty cart.'! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:31:05' prior: 50552587!
+test01CashierCanNotPriceEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidEmptyCartErrorMessage.]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:31:05' prior: 50552554!
+priceOf: aCart
+	^self error: self class invalidEmptyCartErrorMessage.! !
+
+!methodRemoval: Cashier class #invalidCartErrorMessage stamp: 'Simon 10/31/2022 18:31:05'!
+invalidCartErrorMessage
+	^ 'Cashier cannot price an empty cart.'!
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:31:50' prior: 50552674!
+priceOf: aCart
+	(aCart isEmpty) ifTrue: [^self error: self class invalidEmptyCartErrorMessage.]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 18:32:01'!
+PASSED!
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:32:09' prior: 50552684!
+priceOf: aCart
+	(aCart isEmpty) ifTrue: [self error: self class invalidEmptyCartErrorMessage.]! !
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:32:28'!
+raiseErrorIfCartIsEmpty: aCart
+
+	^ (aCart isEmpty) ifTrue: [self error: self class invalidEmptyCartErrorMessage.]! !
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:32:28' prior: 50552693!
+priceOf: aCart
+	self raiseErrorIfCartIsEmpty: aCart! !
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:32:34' prior: 50552699!
+raiseErrorIfCartIsEmpty: aCart
+
+	^ (aCart isEmpty) ifTrue: [^self error: self class invalidEmptyCartErrorMessage.]! !
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:33:23' prior: 50552706!
+priceOf: aCart
+	self raiseErrorIfCartIsEmpty: aCart.
+	^1*peso.! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 18:33:25'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 18:33:25'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:33:37'!
+test02PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:34:12'!
+test03PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.! !
+
+!methodRemoval: CashierTest #test02PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 18:34:13'!
+test02PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 18:34:44' prior: 50552737!
+test03PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: (cashier priceOf: cart ) equals: 14*peso.! !
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 18:34:50' prior: 50552623!
+defaultPriceList
+	
+	^ Dictionary new at: '1' put: 1*peso; at: '2' put: 2*peso; at: '3' put: 3*peso! !
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 18:35:01'!
+FAILURE!
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:35:29' prior: 50552718!
+priceOf: aCart
+	self raiseErrorIfCartIsEmpty: aCart.
+	
+	^1*peso.! !
+!Cart methodsFor: 'initialization' stamp: 'Simon 10/31/2022 18:37:15' prior: 50552307!
+initializeAcceptingItemsOf: aCatalog
+
+	catalog := aCatalog.
+	items := Bag new.! !
+!Cart methodsFor: 'adding' stamp: 'Simon 10/31/2022 18:38:03' prior: 50552325!
+add: aQuantity of: anItem
+
+	self assertIsValidQuantity: aQuantity.
+	self assertIsValidItem: anItem.
+
+	items add: anItem withOccurrences: aQuantity.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 18:38:04'!
+PASSED!
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 18:43:52'!
+withOccurrencesDo: aBlock
+
+	^items withOccurrencesDo: aBlock  ! !
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:48:46' prior: 50552775!
+priceOf: aCart
+	self raiseErrorIfCartIsEmpty: aCart.
+	! !
+!Cashier methodsFor: 'pricing' stamp: 'Simon 10/31/2022 18:49:33' prior: 50552825!
+priceOf: aCart
+	self raiseErrorIfCartIsEmpty: aCart.
+	^aCart totalPrice.
+	! !
+
+!methodRemoval: CashierTest #defaultCatalog stamp: 'Simon 10/31/2022 18:49:44'!
+defaultCatalog
+	
+	^ {'1'. '2'. '3'} asOrderedCollection!
+!CartTest methodsFor: 'support' stamp: 'Simon 10/31/2022 18:50:37'!
+defaultPriceList
+	
+	^ Array with: self itemSellByTheStore! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:50:37' prior: 50552468!
+createCart
+	
+	^Cart acceptingItemsOf: self defaultPriceList! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 18:50:37' prior: 50552441!
+createCart
+	
+	^Cart acceptingItemsOf: self defaultPriceList! !
+
+!methodRemoval: CartTest #defaultCatalog stamp: 'Simon 10/31/2022 18:50:37'!
+defaultCatalog
+	
+	^ Array with: self itemSellByTheStore!
+!CartTest methodsFor: 'support' stamp: 'Simon 10/31/2022 18:51:05' prior: 50552839!
+defaultPriceList
+	
+	^ Dictionary new at: self itemSellByTheStore put: 1*peso.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 18:51:07'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 18:51:07'!
+ERROR!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 18:51:07'!
+ERROR!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 18:51:07'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 18:51:07'!
+ERROR!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 18:51:07'!
+ERROR!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 18:51:07'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 18:51:07'!
+ERROR!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 18:51:10'!
+ERROR!
+!CartTest methodsFor: 'support' stamp: 'Simon 10/31/2022 18:51:43' prior: 50552858!
+defaultPriceList
+	
+	^ Dictionary new at: self itemSellByTheStore put: 1*peso; yourself.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 18:51:45'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 18:51:45'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 18:51:45'!
+ERROR!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 18:51:45'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 18:51:45'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 18:51:45'!
+ERROR!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 18:51:45'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 18:51:45'!
+ERROR!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 18:51:49'!
+ERROR!
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 18:52:25' prior: 50552294!
+assertIsValidItem: anItem
+
+	(catalog includes: anItem) ifFalse: [ self error: self class invalidItemErrorMessage ]! !
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 18:52:26'!
+ERROR!
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 18:52:53' prior: 50552929!
+assertIsValidItem: anItem
+
+	(catalog includes: anItem) ifFalse: [ self error: self invalidItemErrorMessage ]! !
+!Bag methodsFor: 'enumerating' stamp: 'Simon 10/31/2022 18:53:22' prior: 50344825!
+withOccurrencesDo: aBlock
+	contents associationsDo: [:each| aBlock value: each key value: each value]! !
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 18:54:30' prior: 50552939!
+assertIsValidItem: anItem
+
+	catalog at: anItem ifAbsent: [self error: self invalidItemErrorMessage] ! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 18:54:37'!
+PASSED!
+!Cart methodsFor: 'initialization' stamp: 'Simon 10/31/2022 18:56:49' prior: 50552780!
+initializeAcceptingItemsOf: aCatalog
+
+	catalog := aCatalog.
+	self raiseErrorIfCatalogHasNegativePrices.
+	items := Bag new.! !
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 18:57:42'!
+raiseErrorIfCatalogHasNegativePrices
+
+	catalog! !
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 18:59:40' prior: 50552992!
+raiseErrorIfCatalogHasNegativePrices
+
+	catalog valuesDo: [:price | (price < 0) ifTrue: [self error: self invalidPriceErrorMesage ] ].! !
+!Cart methodsFor: 'error messages' stamp: 'Simon 10/31/2022 19:00:14'!
+invalidPriceErrorMesage
+	
+	^'Price list cannot have negative prices.'! !
+!CartTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:01:06'!
+invalidPriceList
+	
+	^ Dictionary new at: '1' put: 1*peso; at: '2' put: -1*peso; yourself.! !
+
+(1 * peso ) < 0 !
+
+(-1 * peso ) < 0  !
+
+(-1 * peso ) < 0   !
+
+(-1 ) < 0 * peso !
+
+-1  < (0 * peso ) !
+
+-1 *peso   < (0 * peso ) !
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 19:02:47' prior: 50552997!
+raiseErrorIfCatalogHasNegativePrices
+
+	catalog valuesDo: [:price | (price < 0 * peso) ifTrue: [self error: self invalidPriceErrorMesage ] ].! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:04:00'!
+test09CartCannotHaveInvalidPriceList
+	| cart |
+	
+	cart := Cart.
+	
+	cart add: 2 of: self itemSellByTheStore.
+	self assert: (cart occurrencesOf: self itemSellByTheStore) = 2! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:04:22' prior: 50553026!
+test09CartCannotHaveInvalidPriceList
+	| cart |
+	
+	cart := Cart acceptingItemsOf: self invalidPriceList.
+	
+	cart add: 2 of: self itemSellByTheStore.
+	self assert: (cart occurrencesOf: self itemSellByTheStore) = 2! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:05:02' prior: 50553035!
+test09CartCannotHaveInvalidPriceList
+	
+	
+	
+	self 
+		should: [Cart acceptingItemsOf: self invalidPriceList.]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cart new invalidPriceErrorMesage.]! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:05:08' prior: 50553045!
+test09CartCannotHaveInvalidPriceList
+	
+	self 
+		should: [Cart acceptingItemsOf: self invalidPriceList.]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cart new invalidPriceErrorMesage.]! !
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 10/31/2022 19:05:09'!
+ERROR!
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 19:05:38' prior: 50553019!
+raiseErrorIfCatalogHasNegativePrices
+
+	catalog valuesDo: [:price | (price < (0 * peso) ) ifTrue: [self error: self invalidPriceErrorMesage ] ].! !
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 10/31/2022 19:05:39'!
+PASSED!
+!Cart methodsFor: 'assertions' stamp: 'Simon 10/31/2022 19:06:07' prior: 50553070!
+raiseErrorIfCatalogHasNegativePrices
+
+	catalog valuesDo: [:price | (price < 0  ) ifTrue: [self error: self invalidPriceErrorMesage ] ].! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 10/31/2022 19:06:08'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 10/31/2022 19:06:09'!
+PASSED!
+
+!methodRemoval: Cart #withOccurrencesDo: stamp: 'Simon 10/31/2022 19:06:30'!
+withOccurrencesDo: aBlock
+
+	^items withOccurrencesDo: aBlock  !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:06:49'!
+ERROR!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:06:49'!
+ERROR!
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:07:40'!
+totalPrice
+
+	^1! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:08:18' prior: 50552662!
+test01CashierCanNotPriceEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidEmptyCartErrorMessage.]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:08:19'!
+ERROR!
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:08:40' prior: 50552766!
+defaultPriceList
+	
+	^Dictionary new at: '1' put: 1*peso; at: '2' put: 2*peso; at: '3' put: 3*peso! !
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:08:49' prior: 50553206!
+defaultPriceList
+	
+	^Dictionary new at: '1' put: 1*peso; at: '2' put: 2*peso; at: '3' put: 3*peso;yourself.! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:08:51'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:08:51'!
+FAILURE!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:08:51'!
+FAILURE!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:08:54'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:08:55'!
+FAILURE!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:08:55'!
+FAILURE!
+
+----SNAPSHOT----(31 October 2022 19:09:17) CuisUniversity-5481.image priorSource: 7059698!
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:11:38' prior: 50553187!
+totalPrice
+
+	^items sum: [:item | (catalog at: item) * (items occurrencesOf: item)   ]! !
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:11:46' prior: 50553240!
+totalPrice
+
+	^items sum: [:item | (catalog at: item) * (items occurrencesOf: item) ]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:11:48'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:11:48'!
+ERROR!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:11:48'!
+ERROR!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:11:49'!
+ERROR!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:13:28'!
+ERROR!
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:14:41' prior: 50553246!
+totalPrice
+
+	^items ocurrencesDo: [:item :quantity | (catalog at: item) * quantity ]! !
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:15:02' prior: 50553267!
+totalPrice
+
+	^items withOccurrencesDo: [:item :quantity | (catalog at: item) * quantity ]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:15:03'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:15:03'!
+FAILURE!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:15:03'!
+FAILURE!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:15:05'!
+FAILURE!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:15:14'!
+FAILURE!
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:15:50' prior: 50553273!
+totalPrice
+	| sum |
+	sum := 0 * peso.
+	^items withOccurrencesDo: [:item :quantity | (catalog at: item) * quantity ]! !
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:16:13' prior: 50553295!
+totalPrice
+	| sum |
+	sum := 0 * peso.
+	items withOccurrencesDo: [:item :quantity | sum:= sum + (catalog at: item) * quantity ].
+	^sum.! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:16:17'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:16:17'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:16:17'!
+FAILURE!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:16:17'!
+FAILURE!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:16:30'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:17:05'!
+FAILURE!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:17:05'!
+FAILURE!
+!Cart methodsFor: 'queries' stamp: 'Simon 10/31/2022 19:18:03' prior: 50553302!
+totalPrice
+	| sum |
+	sum := 0 * peso.
+	items withOccurrencesDo: [:item :quantity | sum:= sum + ((catalog at: item) * quantity) ].
+	^sum.! !
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:18:07'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 19:18:10'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 19:18:10'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 19:18:10'!
+PASSED!
+
+----SNAPSHOT----(31 October 2022 19:19:57) CuisUniversity-5481.image priorSource: 7090762!
+
+May of: 2022. !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:28:41'!
+test04CheckoutOfValidCart
+	| cashier cart creditCardExpirationDate creditCardNumber creditCardOwner |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCardNumber := 1.
+	creditCardExpirationDate := '04/23'.
+	creditCardOwner := 'Harry Potter'
+	
+	self assert: (cashier checkoutOf: cart with: creditCardNumber) equals: 14*peso.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:28:54' prior: 50553354!
+test04CheckoutOfValidCart
+	| cashier cart creditCardExpirationDate creditCardNumber creditCardOwner |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCardNumber := 1.
+	creditCardExpirationDate := '04/23'.
+	creditCardOwner := 'Harry Potter'.
+	
+	self assert: (cashier checkoutOf: cart with: creditCardNumber) equals: 14*peso.! !
+
+Date today!
+
+Date today month!
+
+Date today month!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:31:08'!
+validExpirationDateMonthOfYear
+	^Date today month.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:31:19'!
+validExpirationDate
+	^Date today month.! !
+
+!methodRemoval: CashierTest #validExpirationDateMonthOfYear stamp: 'Simon 10/31/2022 19:31:19'!
+validExpirationDateMonthOfYear
+	^Date today month.!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:31:29' prior: 50553368!
+test04CheckoutOfValidCart
+	| cashier cart creditCardExpirationDate creditCardNumber creditCardOwner |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCardNumber := 1.
+	creditCardExpirationDate := self validExpirationDate.
+	creditCardOwner := 'Harry Potter'.
+	
+	self assert: (cashier checkoutOf: cart with: creditCardNumber) equals: 14*peso.! !
+
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'Simon 10/31/2022 19:35:32'!
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+Object subclass: #CreditCard
+	instanceVariableNames: 'number expirationDate owner'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'Simon 10/31/2022 19:36:42'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'number expirationDate owner'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CreditCard methodsFor: 'no messages' stamp: 'Simon 10/31/2022 19:38:46'!
+initializeWith: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate
+	number := creditCardNumber.
+	expirationDate := creditCartExpirationDate.
+	owner := creditCardOwner.! !
+!CreditCard class methodsFor: 'no messages' stamp: 'Simon 10/31/2022 19:39:16'!
+with: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate
+	^self new initializeWith: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate.! !
+
+TestCase subclass: #CreditCardTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCardTest category: 'TusLibros' stamp: 'Simon 10/31/2022 19:40:40'!
+TestCase subclass: #CreditCardTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+----SNAPSHOT----(31 October 2022 19:40:54) CuisUniversity-5481.image priorSource: 7094396!
+!CreditCardTest methodsFor: 'no messages' stamp: 'Simon 10/31/2022 19:42:02'!
+test01CreditCardWithInvalidExpirationDate
+	! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:43:37' prior: 50553465!
+test01CreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: (May of: 1969).! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:44:22' prior: 50553470!
+test01CreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: (May of: 1969).
+	
+	self assert: creditCard isExpired equals: false.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 19:44:23'!
+ERROR!
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 19:44:32'!
+isExpired
+	self shouldBeImplemented.! !
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 19:44:38' prior: 50553490!
+isExpired
+	^false.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 19:44:39'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 19:44:39'!
+PASSED!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:45:21'!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: Date today month.
+	
+	self assert: creditCard isExpired equals: false.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:45:44'!
+validExpirationDate
+
+	^ Date today month! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:45:44' prior: 50553506!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: creditCard isExpired equals: false.! !
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:47:20' prior: 50553515!
+validExpirationDate
+
+	^ Date today month subtractMonth: January.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 19:47:21'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 19:47:21'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 19:47:21'!
+ERROR!
+
+Date today month subtractMonth: January.!
+
+(Month month: 'March' year: 2017) - (Month month: 'January' year: 2017)!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:48:14' prior: 50553530!
+validExpirationDate
+
+	^ Date today month subtractMonth: January.! !
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/TerseGuide.pck.st----!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:50:27' prior: 50553550!
+validExpirationDate
+
+	^ Date today month.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 19:50:29'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 19:50:29'!
+PASSED!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 19:50:36' prior: 50553520!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: creditCard isExpired equals: true.! !
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 19:50:37'!
+FAILURE!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:51:04'!
+invalidExpirationDate
+
+	^ Date today firstDayOfMonth previous: #Monday.! !
+
+ Date today firstDayOfMonth previous: #Monday!
+
+x _ Date newDay: 12 month: #July year: 1999.	"create date from parts"!
+
+y _ x firstDayOfMonth.						"day of year for first day of month"!
+
+x firstDayOfMonth!
+
+ Date dayOfWeek: #Monday!
+
+Date today -1!
+
+	^ Date today - 1 * day.!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 19:56:14' prior: 50556500!
+invalidExpirationDate
+
+	^ Date today - (1 * day).! !
+
+	^ Date today - (1 * day).!
+
+Date today!
+
+FixedGregorianDate today - (1 * day)!
+
+	^ FixedGregorianDate today previous !
+
+ FixedGregorianDate today previous: GregorianMonth oneMonth!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:06:01' prior: 50556514!
+invalidExpirationDate
+
+	^ FixedGregorianDate today previous: GregorianMonth oneMonth! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:06:14' prior: 50556487!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate.
+	
+	self assert: creditCard isExpired equals: true.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:06:29' prior: 50553478!
+test01CreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate.
+	
+	self assert: creditCard isExpired equals: false.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:06:29'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:06:29'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:06:29'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:06:29'!
+FAILURE!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:06:39' prior: 50556531!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: creditCard isExpired equals: true.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:06:49'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:08:52'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:08:52'!
+FAILURE!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:09:26' prior: 50556475!
+validExpirationDate
+
+	^Date today month.! !
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:09:39'!
+validExpirationDate
+	^Date today month.! !
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:10:08' prior: 50553495!
+isExpired
+	^expirationDate < self validExpirationDate.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:10:10'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:10:10'!
+ERROR!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:10:22' prior: 50556585!
+validExpirationDate
+
+	^FixedGregorianDate today month.! !
+
+FixedGregorianDate today month!
+
+FixedGregorianDate today!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:10:53' prior: 50556606!
+validExpirationDate
+
+	^FixedGregorianDate today.! !
+
+FixedGregorianDate today monthOfYear!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:11:27' prior: 50556613!
+validExpirationDate
+
+	^FixedGregorianDate today monthOfYear.! !
+
+ FixedGregorianDate today previous: GregorianMonth oneMonth!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:11:37' prior: 50556525!
+invalidExpirationDate
+
+	^ FixedGregorianDate today previous: GregorianMonth oneMonth.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:11:42'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:11:42'!
+ERROR!
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:11:57' prior: 50556589!
+validExpirationDate
+
+	^FixedGregorianDate today monthOfYear.! !
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:12:03' prior: 50556639!
+validExpirationDate
+	^FixedGregorianDate today monthOfYear.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:12:05'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:12:05'!
+FAILURE!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:12:10'!
+ERROR!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:29:59' prior: 50553396!
+test04CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (cashier checkoutOf: cart with: creditCard) equals: 14*peso.! !
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:30:42'!
+invalidExpirationDate
+	^ FixedGregorianDate today previous: GregorianMonth oneMonth.! !
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:30:50' prior: 50556672!
+invalidExpirationDate
+	^FixedGregorianDate today previous: GregorianMonth oneMonth.! !
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:31:04' prior: 50553387!
+validExpirationDate
+	^FixedGregorianDate today.! !
+
+!methodRemoval: CreditCard #validExpirationDate stamp: 'Simon 10/31/2022 20:35:24'!
+validExpirationDate
+	^FixedGregorianDate today monthOfYear.!
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:35:39'!
+isExpiredOn: aDate
+	^expirationDate < aDate.! !
+
+!methodRemoval: CreditCard #isExpired stamp: 'Simon 10/31/2022 20:35:42'!
+isExpired
+	^expirationDate < self validExpirationDate.!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:36:22' prior: 50556541!
+test01CreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: false.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:36:37' prior: 50556565!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: true.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:37:06'!
+ERROR!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:37:06'!
+ERROR!
+!CreditCardTest methodsFor: 'support' stamp: 'Simon 10/31/2022 20:37:54' prior: 50556626!
+invalidExpirationDate
+
+	^ (FixedGregorianDate today previous: GregorianMonth oneMonth) monthOfYear.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:37:59'!
+FAILURE!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:37:59'!
+FAILURE!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:56:29'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:56:29'!
+FAILURE!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:56:31'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:56:42'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:56:42'!
+FAILURE!
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:56:52' prior: 50556693!
+isExpiredOn: aDate
+	^expirationDate > aDate.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:56:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:56:56'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:56:56'!
+FAILURE!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:57:00'!
+PASSED!
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:57:16' prior: 50556762!
+isExpiredOn: aDate
+	^expirationDate < aDate.! !
+
+expirationDate < aDate.!
+!CreditCard methodsFor: 'expiration' stamp: 'Simon 10/31/2022 20:57:48' prior: 50556781!
+isExpiredOn: aDate
+	^expirationDate < aDate.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:57:58' prior: 50556702!
+test01CreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: true.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 20:58:03' prior: 50556713!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: false.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 20:58:05'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 20:58:05'!
+PASSED!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:03:05'!
+test02CannotCreateCreditCardWithInvalidOwner
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: '    ' thatExpiresIn: self validExpirationDate.
+	
+	self should: [CreditCard with: 1 of: '    ' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:03:28'!
+ERROR!
+!CreditCard class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:03:51'!
+invalidOwnerErrorDescription
+	self shouldBeImplemented.! !
+!CreditCard class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:05:21' prior: 50556836!
+invalidOwnerErrorDescription
+	^'Owner cannot have more than 30 characters or be empty'.! !
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:05:25'!
+FAILURE!
+!CreditCard class methodsFor: 'instance creation' stamp: 'Simon 10/31/2022 21:10:46' prior: 50553442!
+with: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate
+	(creditCardOwner isLastSeparator | (creditCardOwner length > 30)) ifTrue: [self error: self invalidOwnerErrorDescription ].
+	^self new initializeWith: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:11:32' prior: 50556820!
+test02CannotCreateCreditCardWithInvalidOwner
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: '                                                                 ' thatExpiresIn: self validExpirationDate.
+	
+	self should: [CreditCard with: 1 of: '    ' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:11:43'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'Simon 10/31/2022 21:12:05' prior: 50556851!
+with: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate
+	(creditCardOwner isLastSeparator | (creditCardOwner size > 30)) ifTrue: [self error: self invalidOwnerErrorDescription ].
+	^self new initializeWith: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:12:06'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:12:06'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:12:06'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:12:06'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'Simon 10/31/2022 21:12:50' prior: 50556883!
+with: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate
+	(creditCardOwner isLastSeparator | (creditCardOwner size > 30)) ifTrue: [^self error: self invalidOwnerErrorDescription ].
+	^self new initializeWith: creditCardNumber of: creditCardOwner thatExpiresIn: creditCartExpirationDate.! !
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:12:52'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:12:52'!
+ERROR!
+
+!testRun: #CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:12:52'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:12:52'!
+ERROR!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:13:39'!
+test03CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: false.! !
+
+!methodRemoval: CreditCardTest #test02CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:13:39'!
+test02CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: false.!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:13:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:13:48'!
+ERROR!
+
+!testRun: #CreditCardTest #test03CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:13:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:13:48'!
+ERROR!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:14:20' prior: 50556864!
+test02CannotCreateCreditCardWithInvalidOwner
+	
+	
+	self should: [CreditCard with: 1 of: '     ' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:14:32'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:14:32'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:14:32'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:14:32'!
+PASSED!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:15:19' prior: 50556974!
+test02CannotCreateCreditCardWithInvalidOwner
+	
+	
+	self should: [CreditCard with: 1 of: '     ' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.
+	
+	self should: [CreditCard with: 1 of: 'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:15:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:15:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:15:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:15:20'!
+PASSED!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:15:47'!
+test03isNotExpiredACreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: false.! !
+
+!methodRemoval: CreditCardTest #test03CreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:15:50'!
+test03CreditCardWithValidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: false.!
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:16:13'!
+test02isExpiredACreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: true.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:16:21'!
+test01CannotCreateCreditCardWithInvalidOwner
+	
+	
+	self should: [CreditCard with: 1 of: '     ' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.
+	
+	self should: [CreditCard with: 1 of: 'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!methodRemoval: CreditCardTest #test01CreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:16:24'!
+test01CreditCardWithInvalidExpirationDate
+	| creditCard |
+	creditCard:= CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate.
+	
+	self assert: (creditCard isExpiredOn: self validExpirationDate) equals: true.!
+
+!methodRemoval: CreditCardTest #test02CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:16:26'!
+test02CannotCreateCreditCardWithInvalidOwner
+	
+	
+	self should: [CreditCard with: 1 of: '     ' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.
+	
+	self should: [CreditCard with: 1 of: 'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm' thatExpiresIn: self validExpirationDate.]
+	 raise:  Error  withMessageText: CreditCard invalidOwnerErrorDescription.!
+
+!testRun: #CreditCardTest #test01CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 10/31/2022 21:16:31'!
+PASSED!
+
+!testRun: #CreditCardTest #test02isExpiredACreditCardWithInvalidExpirationDate stamp: 'Simon 10/31/2022 21:16:31'!
+PASSED!
+
+!testRun: #CreditCardTest #test03isNotExpiredACreditCardWithValidExpirationDate stamp: 'Simon 10/31/2022 21:16:31'!
+PASSED!
+!CashierTest methodsFor: 'support' stamp: 'Simon 10/31/2022 21:19:42' overrides: 16961394!
+setUp
+	| salesBook |
+	salesBook := OrderedCollection new.! !
+
+!classDefinition: #CashierTest category: 'TusLibros' stamp: 'Simon 10/31/2022 21:21:31'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: 'salesBoook'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:21:30' prior: 50557114 overrides: 16961394!
+setUp
+	salesBoook := OrderedCollection new.
+	! !
+
+!classDefinition: #CashierTest category: 'TusLibros' stamp: 'Simon 10/31/2022 21:21:44'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: 'salesBook'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'Simon 10/31/2022 21:21:44' prior: 50557127 overrides: 16961394!
+setUp
+	salesBook := OrderedCollection new.
+	! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:22:15' prior: 50553191!
+test01CashierCanNotPriceEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidEmptyCartErrorMessage.]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:22:18'!
+ERROR!
+!Cashier class methodsFor: 'instance creation' stamp: 'Simon 10/31/2022 21:22:34'!
+with: anOrderedCollection 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWith: anOrderedCollection ! !
+!Cashier class methodsFor: 'instance creation' stamp: 'Simon 10/31/2022 21:22:55' prior: 50557160!
+with: aSalesBook 
+
+	^self new initializeWith: aSalesBook .! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:22:58'!
+ERROR!
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'Simon 10/31/2022 21:23:16'!
+Object subclass: #Cashier
+	instanceVariableNames: 'salesBook'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'initialize' stamp: 'Simon 10/31/2022 21:23:16'!
+initializeWith: aSalesBook 
+	self shouldBeImplemented.
+	salesBook := aSalesBook.! !
+!Cashier methodsFor: 'initialize' stamp: 'Simon 10/31/2022 21:23:22' prior: 50557184!
+initializeWith: aSalesBook 
+	salesBook := aSalesBook.! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:23:26'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:23:26'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:23:26'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:23:26'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:23:26'!
+ERROR!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:23:26'!
+ERROR!
+
+!classDefinition: #CashierTest category: 'TusLibros' stamp: 'Simon 10/31/2022 21:24:32'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: 'salesBook casshier'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:24:30' prior: 50557140 overrides: 16961394!
+setUp
+	salesBook := OrderedCollection new.
+	casshier := Cashier with: salesBook .
+	! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:25:01' prior: 50557221 overrides: 16961394!
+setUp
+	salesBook := OrderedCollection new.
+	! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:25:53' prior: 50552635!
+test02PriceOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier with: 	salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:25:59' prior: 50552756!
+test03PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: (cashier priceOf: cart ) equals: 14*peso.! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:26:05'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:26:05'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:26:05'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:26:05'!
+ERROR!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:26:05'!
+ERROR!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:26:21' prior: 50556660!
+test04CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (cashier checkoutOf: cart with: creditCard) equals: 14*peso.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:26:41' prior: 50557267!
+test04CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (cashier checkoutOf: cart payingWith: creditCard) equals: 14*peso.! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:27:38'!
+test04CheckoutOfInvalidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (cashier checkoutOf: cart payingWith: creditCard) ! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:30:01' prior: 50557293!
+test04CheckoutOfInvalidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] raise: Error withMessageText:Cashier invalidEmptyCartErrorMessage .! !
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:30:04'!
+FAILURE!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:30:23'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:30:23'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:30:23'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:30:23'!
+FAILURE!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:30:23'!
+ERROR!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:30:36'!
+FAILURE!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:30:48'!
+ERROR!
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:31:12'!
+checkoutOf: aCart payingWith: aCreditCard 
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:32:16' prior: 50557345!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .]! !
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:32:18' prior: 50557350!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].! !
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:32:21' prior: 50557357!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	! !
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:32:23'!
+FAILURE!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:32:27'!
+FAILURE!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:32:39'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:32:39'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:32:39'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:32:39'!
+FAILURE!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:32:39'!
+FAILURE!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:32:47'!
+FAILURE!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:33:13' prior: 50557306!
+test04CheckoutOfInvalidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:33:33' prior: 50557396!
+test04CheckoutOfInvalidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .! !
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:33:34'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:33:37'!
+FAILURE!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:34:08'!
+test05CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (cashier checkoutOf: cart payingWith: creditCard) equals: 14*peso.! !
+
+!methodRemoval: CashierTest #test04CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:34:08'!
+test04CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self assert: (cashier checkoutOf: cart payingWith: creditCard) equals: 14*peso.!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:35:03' prior: 50557431!
+test05CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty )! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:35:10' prior: 50557457!
+test05CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:35:34' prior: 50557411!
+test04CheckoutOfInvalidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:35:37'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:35:37'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:35:37'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:35:37'!
+PASSED!
+
+!testRun: #CashierTest #test05CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:35:37'!
+FAILURE!
+
+!testRun: #CashierTest #test05CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:35:37'!
+FAILURE!
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:37:08' prior: 50557364!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	salesBook add: aCart .
+	! !
+
+----SNAPSHOT----(31 October 2022 21:37:32) CuisUniversity-5481.image priorSource: 7097956!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:37:49'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:37:49'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:37:49'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:37:49'!
+PASSED!
+
+!testRun: #CashierTest #test05CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:37:49'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:40:08'!
+test04CannotCheckoutAnEmptyCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test04CheckoutOfInvalidCart stamp: 'Simon 10/31/2022 21:40:08'!
+test04CheckoutOfInvalidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:40:37'!
+test05CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test05CheckoutOfValidCart stamp: 'Simon 10/31/2022 21:40:37'!
+test05CheckoutOfValidCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:41:01'!
+test08CanCheckout
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:41:01'!
+test05CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:41:56'!
+test05CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:42:01'!
+ERROR!
+!Cashier class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:42:11'!
+expiredCardErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:42:43' prior: 50557645!
+expiredCardErrorDescription
+	'Expired card'.! !
+!Cashier class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:42:46' prior: 50557650!
+expiredCardErrorDescription
+	'Expired card'.! !
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:42:48'!
+FAILURE!
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:44:04' prior: 50557517!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: self)
+	salesBook add: aCart .
+	! !
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:45:20' prior: 50557663!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: self) ifTrue:[self error: self class expiredCardErrorDescription .].
+	salesBook add: aCart .
+	! !
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:46:04' prior: 50557672!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue:[self error: self class expiredCardErrorDescription .].
+	salesBook add: aCart .
+	! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:46:12'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:46:12'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:46:12'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 'Simon 10/31/2022 21:46:12'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:46:12'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 'Simon 10/31/2022 21:46:12'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:46:12'!
+FAILURE!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:46:53' prior: 50557626!
+test05CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 'Simon 10/31/2022 21:46:54'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 10/31/2022 21:48:45'!
+test06CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 9999999999999999 of: 'Robada' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+Object subclass: #MerchantProccesorDouble
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #MerchantProccesorDouble category: 'TusLibros' stamp: 'Simon 10/31/2022 21:50:22'!
+Object subclass: #MerchantProccesorDouble
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:52:09' prior: 50557683!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue:[self error: self class expiredCardErrorDescription .].
+	MerchantProccesorDouble debit: (aCart totalPrice ) from: aCreditCard.
+	salesBook add: aCart .
+	! !
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'Simon 10/31/2022 21:54:25'!
+Object subclass: #Cashier
+	instanceVariableNames: 'salesBook merchantProccesorDouble'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:54:13' prior: 50557783!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue:[self error: self class expiredCardErrorDescription .].
+	merchantProccesorDouble debit: (aCart totalPrice ) from: aCreditCard.
+	salesBook add: aCart .
+	! !
+!Cashier methodsFor: 'checkout' stamp: 'Simon 10/31/2022 21:54:40' prior: 50557804!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue:[self error: self class expiredCardErrorDescription .].
+	"merchantProccesorDouble debit: (aCart totalPrice ) from: aCreditCard."
+	salesBook add: aCart .
+	! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:54:42'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:54:42'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:54:42'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 'Simon 10/31/2022 21:54:42'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:54:42'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 10/31/2022 21:54:42'!
+ERROR!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 'Simon 10/31/2022 21:54:42'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 10/31/2022 21:54:42'!
+ERROR!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 10/31/2022 21:54:51'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 10/31/2022 21:54:51'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 10/31/2022 21:54:51'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 'Simon 10/31/2022 21:54:51'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 10/31/2022 21:54:51'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 10/31/2022 21:54:51'!
+ERROR!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 'Simon 10/31/2022 21:54:51'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 10/31/2022 21:54:51'!
+ERROR!
+!Cashier class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:54:56'!
+stolenCardErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'errors' stamp: 'Simon 10/31/2022 21:55:28' prior: 50557881!
+stolenCardErrorDescription
+	^'Stolen card'.! !
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 10/31/2022 21:55:31'!
+FAILURE!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 10/31/2022 21:55:32'!
+PASSED!
+
+----SNAPSHOT----(31 October 2022 21:55:45) CuisUniversity-5481.image priorSource: 7227961!
+
+----STARTUP---- (1 November 2022 18:01:15) as /home/clinux01/Desktop/linux64/CuisUniversity-5510.image!
+
+
+----End fileIn of /home/clinux01/Downloads/TusLibros.st----!
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:05:24' prior: 50555475!
+test06CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 9999999999999999 of: 'Robada' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:05:28'!
+ERROR!
+!Cashier class methodsFor: 'instance creation' stamp: 's 11/1/2022 18:05:45'!
+withSalesBook: anOrderedCollection andMerchantProcessor: aMerchantProccesorDouble 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithSalesBook: anOrderedCollection andMerchantProcessor: aMerchantProccesorDouble ! !
+!Cashier class methodsFor: 'instance creation' stamp: 's 11/1/2022 18:06:19' prior: 50555809!
+withSalesBook: aSalesBook andMerchantProcessor: aMerchantProccesorDouble 
+	
+	^self new initializeWithSalesBook: aSalesBook andMerchantProcessor: aMerchantProccesorDouble ! !
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:06:23'!
+ERROR!
+!Cashier methodsFor: 'initialize' stamp: 's 11/1/2022 18:06:33'!
+initializeWithSalesBook: aSalesBook andMerchantProcessor: aMerchantProccesorDouble 
+	self shouldBeImplemented.
+	salesBook := aSalesBook.
+	merchantProccesorDouble := aMerchantProccesorDouble.! !
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 's 11/1/2022 18:06:54'!
+Object subclass: #Cashier
+	instanceVariableNames: 'salesBook merchantProccesorDouble merchantProccesor'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'initialize' stamp: 's 11/1/2022 18:06:51' prior: 50555832!
+initializeWithSalesBook: aSalesBook andMerchantProcessor: aMerchantProccesor 
+	salesBook := aSalesBook.
+	merchantProccesor := aMerchantProccesor.! !
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:06:57'!
+FAILURE!
+!Cashier class methodsFor: 'instance creation' stamp: 's 11/1/2022 18:07:19' prior: 50555821!
+withSalesBook: aSalesBook andMerchantProcessor: aMerchantProccesor 
+	
+	^self new initializeWithSalesBook: aSalesBook andMerchantProcessor: aMerchantProccesor! !
+!Cashier methodsFor: 'checkout' stamp: 's 11/1/2022 18:08:03' prior: 50555682!
+checkoutOf: aCart payingWith: aCreditCard 
+	(aCart isEmpty ) ifTrue:[self error: self class invalidEmptyCartErrorMessage .].
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue:[self error: self class expiredCardErrorDescription .].
+	merchantProccesor debit: (aCart totalPrice ) from: aCreditCard.
+	salesBook add: aCart .
+	! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:08:06'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:08:06'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:08:06'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:08:06'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:08:06'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:08:06'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:08:06'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:08:08'!
+FAILURE!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:08:53'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:08:53'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:08:53'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:08:53'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:08:53'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:08:53'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:08:53'!
+ERROR!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:08:56'!
+ERROR!
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:09:20' prior: 50555491!
+test08CanCheckout
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:09:26' prior: 50555459!
+test05CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:09:31' prior: 50555444!
+test04CannotCheckoutAnEmptyCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:09:37' prior: 50555434!
+test03PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: (cashier priceOf: cart ) equals: 14*peso.! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:09:43' prior: 50555425!
+test02PriceOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.! !
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:09:48'!
+ERROR!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:09:48'!
+ERROR!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:10:56'!
+debit: aString from: aCreditCard 
+	self shouldBeImplemented.! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:11:34' prior: 50556006!
+debit: aPrice from: aCreditCard 
+	! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:11:51' prior: 50556012!
+debit: anAmount from: aCreditCard 
+	! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:13:14' prior: 50556017!
+debit: anAmount from: aCreditCard 
+	^self error: self class stolenCardErrorDescription.! !
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:13:20'!
+ERROR!
+!MerchantProccesorDouble class methodsFor: 'errors' stamp: 's 11/1/2022 18:13:46'!
+stolenCardErrorDescription
+	self shouldBeImplemented.! !
+!MerchantProccesorDouble class methodsFor: 'errors' stamp: 's 11/1/2022 18:15:54' prior: 50556030!
+stolenCardErrorDescription
+	^'Cannot Debit: Stolen Card'.! !
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:15:59'!
+ERROR!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:16:10'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:16:10'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:16:10'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:16:10'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:16:10'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:16:10'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:16:10'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:16:12'!
+FAILURE!
+
+!methodRemoval: Cashier class #stolenCardErrorDescription stamp: 's 11/1/2022 18:17:41'!
+stolenCardErrorDescription
+	^'Stolen card'.!
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:17:56' prior: 50555788!
+test06CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 9999999999999999 of: 'Robada' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:17:59'!
+FAILURE!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:18:11'!
+FAILURE!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:18:11'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:18:29'!
+ERROR!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:19:27'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:19:27'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:19:27'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:19:27'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:19:27'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:19:27'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:19:27'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:19:33'!
+FAILURE!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:20:00' prior: 50556022!
+debit: anAmount from: aCreditCard 
+	self error: self class stolenCardErrorDescription.! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:20:05'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:20:05'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:20:05'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:20:05'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:20:05'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:20:05'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:20:05'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:20:11'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:20:21'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:21:16'!
+FAILURE!
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:21:43' prior: 50556070!
+test06CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 9999999999999999 of: 'Robada' thatExpiresIn: self validExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:21:47'!
+PASSED!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:21:47'!
+ERROR!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:21:47'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:21:51'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:24:48'!
+test07CannotCheckoutWithACardWithInsufficientCredit
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 888888888888888 of: 'Insuficiente' thatExpiresIn: self validExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:25:31' prior: 50556205!
+test07CannotCheckoutWithACardWithInsufficientCredit
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 888888888888888 of: 'Insuficiente' thatExpiresIn: self validExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble insufficientCreditErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:25:36'!
+ERROR!
+!MerchantProccesorDouble class methodsFor: 'errors' stamp: 's 11/1/2022 18:25:56'!
+insufficientCreditErrorDescription
+	self shouldBeImplemented.! !
+!MerchantProccesorDouble class methodsFor: 'errors' stamp: 's 11/1/2022 18:26:53' prior: 50556247!
+insufficientCreditErrorDescription
+	^'Cannot debit from a card with insufficient credit'! !
+!MerchantProccesorDouble class methodsFor: 'errors' stamp: 's 11/1/2022 18:26:56' prior: 50556253!
+insufficientCreditErrorDescription
+	^'Cannot debit from a card with insufficient credit'.! !
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:26:58'!
+FAILURE!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:27:05'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:27:05'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:27:05'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:27:05'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:27:05'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:27:05'!
+PASSED!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:27:05'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:27:05'!
+ERROR!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:27:08'!
+ERROR!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:29:12' prior: 50556125!
+debit: anAmount from: aCreditCard 
+	(aCreditCard = 2) ifTrue: [self error: self class stolenCardErrorDescription.]! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:29:41'!
+stolenCreditCard
+
+	^ CreditCard with: 9999999999999999 of: 'Robada' thatExpiresIn: self validExpirationDate! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:29:41' prior: 50556160!
+test06CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self stolenCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:30:01' prior: 50556296!
+debit: anAmount from: aCreditCard 
+	(aCreditCard = CashierTest stolenCreditCard ) ifTrue: [self error: self class stolenCardErrorDescription.]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:30:09' prior: 50556325!
+debit: anAmount from: aCreditCard 
+	(aCreditCard = CashierTest new stolenCreditCard ) ifTrue: [self error: self class stolenCardErrorDescription.]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:30:47' prior: 50556333!
+debit: anAmount from: aCreditCard 
+	(aCreditCard = CashierTest new stolenCreditCard ) ifTrue: [self error: self class stolenCardErrorDescription.].
+	(aCreditCard = CashierTest new insufficientCreditCard ) ifTrue: [self error: self class insufficientCreditErrorDescription .]! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:31:12'!
+insufficientCreditCard
+
+	^ CreditCard with: 888888888888888 of: 'Insuficiente' thatExpiresIn: self validExpirationDate! !
+!CashierTest methodsFor: 'tests' stamp: 's 11/1/2022 18:31:12' prior: 50556224!
+test07CannotCheckoutWithACardWithInsufficientCredit
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self insufficientCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble insufficientCreditErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:31:16'!
+FAILURE!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:31:25'!
+FAILURE!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:31:25'!
+FAILURE!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:31:42'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:31:45'!
+FAILURE!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:31:45'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:31:56'!
+PASSED!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:32:16' prior: 50556341!
+debit: anAmount from: aCreditCard 
+	(aCreditCard = CashierTest new stolenCreditCard ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard = CashierTest new insufficientCreditCard ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:32:20'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:32:20'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:32:20'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:32:20'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:32:20'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:32:20'!
+FAILURE!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:32:20'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:32:20'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:32:28'!
+FAILURE!
+
+(aCreditCard = CashierTest new stolenCreditCard )!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:33:27'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:33:27'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:33:27'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:33:27'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:33:27'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:33:27'!
+FAILURE!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:33:27'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:33:27'!
+PASSED!
+
+CashierTest new stolenCreditCard!
+
+aCreditCard!
+
+aCreditCard = CashierTest new stolenCreditCard!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:34:38' prior: 50556399!
+debit: anAmount from: aCreditCard 
+	(aCreditCard = CashierTest new stolenCreditCard ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard = CashierTest new insufficientCreditCard ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!CreditCard methodsFor: 'nil' stamp: 's 11/1/2022 18:39:17'!
+number
+	^number.! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:39:55' prior: 50556468!
+debit: anAmount from: aCreditCard 
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:39:58'!
+PASSED!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:44:48' prior: 50556483!
+debit: anAmount from: aCreditCard 
+	self deny: (aCreditCard isExpiredOn: 	FixedGregorianDate today).
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CreditCardTest #test01CannotCreateCreditCardWithInvalidOwner stamp: 's 11/1/2022 18:44:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test02isExpiredACreditCardWithInvalidExpirationDate stamp: 's 11/1/2022 18:44:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test03isNotExpiredACreditCardWithValidExpirationDate stamp: 's 11/1/2022 18:44:56'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:44:59'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:44:59'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:44:59'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:44:59'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:44:59'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:44:59'!
+FAILURE!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:44:59'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:44:59'!
+ERROR!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:45:29'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:45:29'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:45:29'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:45:29'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:45:29'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:45:29'!
+FAILURE!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:45:29'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:45:29'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:45:32'!
+FAILURE!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:46:18' prior: 50556520!
+debit: anAmount from: aCreditCard 
+	self exception: (aCreditCard isExpiredOn: 	FixedGregorianDate today).
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:46:22'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:46:22'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:46:22'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:46:22'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:46:22'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:46:22'!
+FAILURE!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:46:22'!
+FAILURE!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:46:22'!
+ERROR!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:46:25'!
+FAILURE!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 's 11/1/2022 18:48:00' prior: 50556598!
+debit: anAmount from: aCreditCard 
+	 (aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self exception: 	'O'].
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 's 11/1/2022 18:48:03'!
+PASSED!
+
+----SNAPSHOT----(1 November 2022 18:48:18) CuisUniversity-5510.image priorSource: 7155150!
+
+----SNAPSHOT----(1 November 2022 18:49:06) CuisUniversity-5510.image priorSource: 7200949!
+
+----STARTUP---- (2 November 2022 07:50:47) as C:\Users\Echu\Downloads\Inge 1\windows64\windows64\CuisUniversity-5481.image!
+
+
+----End fileIn of C:\Users\Echu\Downloads\TusLibros.st----!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:00:37' prior: 50554040!
+debit: anAmount from: aCreditCard 
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self exception: 	'O'].
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:01:05' prior: 50554077!
+debit: anAmount from: aCreditCard 
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self error: 	'O'].
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CreditCardTest #test01CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 11/2/2022 08:01:07'!
+PASSED!
+
+!testRun: #CreditCardTest #test02isExpiredACreditCardWithInvalidExpirationDate stamp: 'Simon 11/2/2022 08:01:07'!
+PASSED!
+
+!testRun: #CreditCardTest #test03isNotExpiredACreditCardWithValidExpirationDate stamp: 'Simon 11/2/2022 08:01:07'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+
+!testRun: #CashierTest #test08CanCheckout stamp: 'Simon 11/2/2022 08:01:09'!
+PASSED!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:01:38' prior: 50554093!
+debit: anAmount from: aCreditCard 
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self error: 	'Innecesary use of Merchant Processor'].
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:10:20'!
+test01CashierCanNotPriceEmptyCart
+	| cart |
+	
+	cart := self createCart.
+	
+	self  should: [cart totalPrice] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidEmptyCartErrorMessage.]! !
+
+!methodRemoval: CartTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 11/2/2022 08:11:53'!
+test01CashierCanNotPriceEmptyCart
+	| cart |
+	
+	cart := self createCart.
+	
+	self  should: [cart totalPrice] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidEmptyCartErrorMessage.]!
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:12:28'!
+test10PriceOfEmptyCart
+	| cart |
+	
+
+	cart := self createCart.
+	
+	self assert: cart totalPrice equals: 0.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:12:32' prior: 50554182!
+test10PriceOfEmptyCart
+	| cart |
+	cart := self createCart.
+	
+	self assert: cart totalPrice equals: 0.! !
+
+!testRun: #CartTest #test10PriceOfEmptyCart stamp: 'Simon 11/2/2022 08:13:11'!
+PASSED!
+
+!testRun: #CartTest #test10PriceOfEmptyCart stamp: 'Simon 11/2/2022 08:13:15'!
+PASSED!
+
+!methodRemoval: CashierTest #test01CashierCanNotPriceEmptyCart stamp: 'Simon 11/2/2022 08:13:29'!
+test01CashierCanNotPriceEmptyCart
+	| cashier cart |
+	
+	cashier := Cashier with: salesBook .
+	cart := self createCart.
+	
+	self  should: [cashier priceOf: cart] 
+		raise: Error
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = Cashier invalidEmptyCartErrorMessage.]!
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:13:54'!
+test02PriceOfCartWithOneBook
+	| cart |
+	
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert:  cart totalPrice equals: 1*peso.! !
+
+!testRun: #CartTest #test02PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:13:56'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:14:13'!
+test11PriceOfCartWithOneBook
+	| cart |
+	
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert:  cart totalPrice equals: 1*peso.! !
+
+!methodRemoval: CartTest #test02PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:14:13'!
+test02PriceOfCartWithOneBook
+	| cart |
+	
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert:  cart totalPrice equals: 1*peso.!
+!CartTest methodsFor: 'support' stamp: 'Simon 11/2/2022 08:15:24'!
+createCartBiggerCatalog
+	
+	^Cart acceptingItemsOf: self biggerPriceList! !
+!CartTest methodsFor: 'support' stamp: 'Simon 11/2/2022 08:15:35'!
+biggerPriceList
+	
+	^Dictionary new at: '1' put: 1*peso; at: '2' put: 2*peso; at: '3' put: 3*peso;yourself.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:15:49' prior: 50554188!
+test10PriceOfEmptyCart
+	| cart |
+	cart := self createCartBiggerCatalog.
+	
+	self assert: cart totalPrice equals: 0.! !
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:16:00' prior: 50554221!
+test11PriceOfCartWithOneBook
+	| cart |
+	
+	cart := self createCartBiggerCatalog.
+	cart add: '1'.
+	
+	self assert:  cart totalPrice equals: 1*peso.! !
+
+!testRun: #CartTest #test11PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test10PriceOfEmptyCart stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!testRun: #CartTest #test11PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:16:01'!
+PASSED!
+
+!methodRemoval: CashierTest #test02PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:16:08'!
+test02PriceOfCartWithOneBook
+	| cashier cart |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	
+	self assert: (cashier priceOf: cart ) equals: 1*peso.!
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:16:28'!
+test03PriceOfCartWithManyBooks
+	| cart |
+	
+	cart := self createCartBiggerCatalog.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: cart totalPrice equals: 14*peso.! !
+
+!testRun: #CartTest #test03PriceOfCartWithManyBooks stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test03PriceOfCartWithManyBooks stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test10PriceOfEmptyCart stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+
+!testRun: #CartTest #test11PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:16:31'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:16:38'!
+test12PriceOfCartWithManyBooks
+	| cart |
+	
+	cart := self createCartBiggerCatalog.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: cart totalPrice equals: 14*peso.! !
+
+!methodRemoval: CartTest #test03PriceOfCartWithManyBooks stamp: 'Simon 11/2/2022 08:16:38'!
+test03PriceOfCartWithManyBooks
+	| cart |
+	
+	cart := self createCartBiggerCatalog.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: cart totalPrice equals: 14*peso.!
+
+!methodRemoval: CashierTest #test03PriceOfCartWithManyBooks stamp: 'Simon 11/2/2022 08:16:53'!
+test03PriceOfCartWithManyBooks
+	| cashier cart |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: 1 of: '1'.
+	cart add: 2 of: '2'.
+	cart add: 3 of: '3'.
+	
+	self assert: (cashier priceOf: cart ) equals: 14*peso.!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:16:59'!
+test01CannotCheckoutAnEmptyCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test04CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:16:59'!
+test04CannotCheckoutAnEmptyCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart..
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:17:05'!
+test02CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test05CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:17:05'!
+test05CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:17:11'!
+test03CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self stolenCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test06CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:17:11'!
+test06CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self stolenCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:17:16'!
+test04CannotCheckoutWithACardWithInsufficientCredit
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self insufficientCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble insufficientCreditErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test07CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:17:16'!
+test07CannotCheckoutWithACardWithInsufficientCredit
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self insufficientCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble insufficientCreditErrorDescription .
+		self assert: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:17:21'!
+test05CanCheckout
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+
+!methodRemoval: CashierTest #test08CanCheckout stamp: 'Simon 11/2/2022 08:17:21'!
+test08CanCheckout
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:18:04'!
+validCreditCard
+
+	^ CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self validExpirationDate! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:18:04' prior: 50554389!
+test01CannotCheckoutAnEmptyCart
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart..
+	creditCard := self validCreditCard.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:18:04' prior: 50554528!
+test05CanCheckout
+	| cashier cart creditCard |
+	
+	cashier := Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self validCreditCard.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+
+!methodRemoval: Cashier #initializeWith: stamp: 'Simon 11/2/2022 08:19:35'!
+initializeWith: aSalesBook 
+	salesBook := aSalesBook.!
+
+!testRun: #CashierTest #test01CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:19:37'!
+PASSED!
+
+!testRun: #CashierTest #test02CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:19:37'!
+PASSED!
+
+!testRun: #CashierTest #test03CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:19:37'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:19:37'!
+PASSED!
+
+!testRun: #CashierTest #test05CanCheckout stamp: 'Simon 11/2/2022 08:19:37'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 11/2/2022 08:19:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test02isExpiredACreditCardWithInvalidExpirationDate stamp: 'Simon 11/2/2022 08:19:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test03isNotExpiredACreditCardWithValidExpirationDate stamp: 'Simon 11/2/2022 08:19:40'!
+PASSED!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:20:05' prior: 50554146!
+debit: anAmount from: aCreditCard 
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self error: 	'Innecesary use of Merchant Processor'].
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:20:11' prior: 50554623!
+debit: anAmount from: aCreditCard 
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self error: 	'Innecesary use of Merchant Processor'].
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:20:41' prior: 50554640!
+debit: anAmount from: aCreditCard 
+	(aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self error: 	'Innecesary use of Merchant Processor'].
+	
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:21:07'!
+assertCardCannotBeExpired: aCreditCard
+
+	^ (aCreditCard isExpiredOn: 	FixedGregorianDate today) ifTrue: [self error: 	'Innecesary use of Merchant Processor']! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:21:07' prior: 50554657!
+debit: anAmount from: aCreditCard 
+	self assertCardCannotBeExpired: aCreditCard.
+	
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:21:25' prior: 50554683!
+debit: anAmount from: aCreditCard 
+	self assertCardCannotBeExpired: aCreditCard.
+	
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:21:52' prior: 50554698!
+debit: anAmount from: aCreditCard 
+	self assertCardCannotBeExpired: aCreditCard.
+	
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:22:18' prior: 50554713!
+debit: anAmount from: aCreditCard 
+	self assertCardCannotBeExpired: aCreditCard.
+	
+	self cardIsStolen: aCreditCard.
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:22:31'!
+cardIsStolen: aCreditCard
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:23:01'!
+assertCardIsNotStolen: aCreditCard
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	! !
+!MerchantProccesorDouble methodsFor: 'as yet unclassified' stamp: 'Simon 11/2/2022 08:23:01' prior: 50554728!
+debit: anAmount from: aCreditCard 
+	self assertCardCannotBeExpired: aCreditCard.
+	
+	self assertCardIsNotStolen: aCreditCard.
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!methodRemoval: MerchantProccesorDouble #cardIsStolen: stamp: 'Simon 11/2/2022 08:23:01'!
+cardIsStolen: aCreditCard
+	(aCreditCard number = CashierTest new stolenCreditCard number ) ifTrue: [^self error: self class stolenCardErrorDescription.].
+	!
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:23:10' prior: 50554756!
+debit: anAmount from: aCreditCard 
+	
+	self assertCardCannotBeExpired: aCreditCard.
+	self assertCardIsNotStolen: aCreditCard.
+	
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:23:31' prior: 50554776!
+debit: anAmount from: aCreditCard 
+	
+	self assertCardCannotBeExpired: aCreditCard.
+	self assertCardIsNotStolen: aCreditCard.
+	self assertCardHasEnoughCredit: aCreditCard.! !
+!MerchantProccesorDouble methodsFor: 'creditcard' stamp: 'Simon 11/2/2022 08:23:40'!
+assertCardHasEnoughCredit: aCreditCard
+	(aCreditCard number = CashierTest new insufficientCreditCard number ) ifTrue: [^self error: self class insufficientCreditErrorDescription .]! !
+
+!testRun: #CreditCardTest #test01CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 11/2/2022 08:23:44'!
+PASSED!
+
+!testRun: #CreditCardTest #test02isExpiredACreditCardWithInvalidExpirationDate stamp: 'Simon 11/2/2022 08:23:44'!
+PASSED!
+
+!testRun: #CreditCardTest #test03isNotExpiredACreditCardWithValidExpirationDate stamp: 'Simon 11/2/2022 08:23:44'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:23:47'!
+PASSED!
+
+!testRun: #CashierTest #test02CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:23:47'!
+PASSED!
+
+!testRun: #CashierTest #test03CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:23:47'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:23:47'!
+PASSED!
+
+!testRun: #CashierTest #test05CanCheckout stamp: 'Simon 11/2/2022 08:23:47'!
+PASSED!
+
+----SNAPSHOT----(2 November 2022 08:24:39) CuisUniversity-5481.image priorSource: 7059698!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:30:41'!
+createCashier
+
+	^ Cashier withSalesBook: salesBook andMerchantProcessor: MerchantProccesorDouble new! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:30:41' prior: 50554459!
+test03CannotCheckoutWithStolenCard
+	| cashier cart creditCard |
+	
+	cashier := self createCashier.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self stolenCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:30:41' prior: 50554562!
+test01CannotCheckoutAnEmptyCart
+	| cashier cart creditCard |
+	
+	cashier := self createCashier.
+	cart := self createCart..
+	creditCard := self validCreditCard.
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier invalidEmptyCartErrorMessage .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:30:41' prior: 50554578!
+test05CanCheckout
+	| cashier cart creditCard |
+	
+	cashier := self createCashier.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self validCreditCard.
+	cashier checkoutOf: cart payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:30:41' prior: 50554423!
+test02CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := self createCashier.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:30:41' prior: 50554492!
+test04CannotCheckoutWithACardWithInsufficientCredit
+	| cashier cart creditCard |
+	
+	cashier := self createCashier.
+	cart := self createCart.
+	cart add: '1'.
+	creditCard := self insufficientCreditCard .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble insufficientCreditErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:31:33' prior: 50554882!
+test02CannotCheckoutWithExpiredCard
+	| cashier cart creditCard |
+	
+	cashier := self createCashier.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cart payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!classDefinition: #CashierTest category: 'TusLibros' stamp: 'Simon 11/2/2022 08:31:53'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: 'salesBook casshier cartWithOneBook'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:31:52' prior: 50553617 overrides: 16961394!
+setUp
+	salesBook := OrderedCollection new.
+	cartWithOneBook := self createCart.
+	cartWithOneBook add: '1'.
+	! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:32:04' prior: 50554914!
+test02CannotCheckoutWithExpiredCard
+	| cashier creditCard |
+	
+	cashier := self createCashier.
+	creditCard := CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate .
+	
+	self should:[ (cashier checkoutOf: cartWithOneBook payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test02CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:32:07'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:32:07'!
+PASSED!
+
+!testRun: #CashierTest #test02CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:32:07'!
+PASSED!
+
+!testRun: #CashierTest #test03CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:32:07'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:32:07'!
+PASSED!
+
+!testRun: #CashierTest #test05CanCheckout stamp: 'Simon 11/2/2022 08:32:07'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:32:14' prior: 50554842!
+test03CannotCheckoutWithStolenCard
+	| cashier creditCard |
+	
+	cashier := self createCashier.
+	creditCard := self stolenCreditCard .
+	
+	self should:[ (cashier checkoutOf: cartWithOneBook payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble stolenCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test03CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:32:17'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:32:17'!
+PASSED!
+
+!testRun: #CashierTest #test02CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:32:17'!
+PASSED!
+
+!testRun: #CashierTest #test03CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:32:17'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:32:17'!
+PASSED!
+
+!testRun: #CashierTest #test05CanCheckout stamp: 'Simon 11/2/2022 08:32:17'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:32:23' prior: 50554898!
+test04CannotCheckoutWithACardWithInsufficientCredit
+	| cashier creditCard |
+	
+	cashier := self createCashier.
+	creditCard := self insufficientCreditCard .
+	
+	self should:[ (cashier checkoutOf: cartWithOneBook payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:MerchantProccesorDouble insufficientCreditErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:32:31' prior: 50554871!
+test05CanCheckout
+	| cashier creditCard |
+	
+	cashier := self createCashier.
+	creditCard := self validCreditCard.
+	cashier checkoutOf: cartWithOneBook payingWith: creditCard.
+	self deny: (salesBook isEmpty ).! !
+
+----SNAPSHOT----(2 November 2022 08:33:07) CuisUniversity-5481.image priorSource: 7141827!
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:35:39'!
+expiredCard
+
+	^ CreditCard with: 1 of: 'Harry Potter' thatExpiresIn: self invalidExpirationDate! !
+!CashierTest methodsFor: 'tests' stamp: 'Simon 11/2/2022 08:35:39' prior: 50554944!
+test02CannotCheckoutWithExpiredCard
+	| cashier creditCard |
+	
+	cashier := self createCashier.
+	creditCard := self expiredCard .
+	
+	self should:[ (cashier checkoutOf: cartWithOneBook payingWith: creditCard) ] 
+	raise: Error 
+	withMessageText:Cashier expiredCardErrorDescription .
+		self assert: (salesBook isEmpty ).! !
+
+!testRun: #CashierTest #test01CannotCheckoutAnEmptyCart stamp: 'Simon 11/2/2022 08:35:44'!
+PASSED!
+
+!testRun: #CashierTest #test02CannotCheckoutWithExpiredCard stamp: 'Simon 11/2/2022 08:35:44'!
+PASSED!
+
+!testRun: #CashierTest #test03CannotCheckoutWithStolenCard stamp: 'Simon 11/2/2022 08:35:44'!
+PASSED!
+
+!testRun: #CashierTest #test04CannotCheckoutWithACardWithInsufficientCredit stamp: 'Simon 11/2/2022 08:35:44'!
+PASSED!
+
+!testRun: #CashierTest #test05CanCheckout stamp: 'Simon 11/2/2022 08:35:44'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CannotCreateCreditCardWithInvalidOwner stamp: 'Simon 11/2/2022 08:35:45'!
+PASSED!
+
+!testRun: #CreditCardTest #test02isExpiredACreditCardWithInvalidExpirationDate stamp: 'Simon 11/2/2022 08:35:45'!
+PASSED!
+
+!testRun: #CreditCardTest #test03isNotExpiredACreditCardWithValidExpirationDate stamp: 'Simon 11/2/2022 08:35:45'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test09CartCannotHaveInvalidPriceList stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test10PriceOfEmptyCart stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test11PriceOfCartWithOneBook stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+!testRun: #CartTest #test12PriceOfCartWithManyBooks stamp: 'Simon 11/2/2022 08:35:49'!
+PASSED!
+
+----SNAPSHOT----(2 November 2022 08:36:00) CuisUniversity-5481.image priorSource: 7148306!
