@@ -1,0 +1,818 @@
+
+
+----QUIT----(26 October 2022 08:07:27) CuisUniversity-5510.image priorSource: 2900072!
+
+----STARTUP---- (26 October 2022 08:07:28) as /Users/hernan/Documents/Cuis/5.0-64Bits/Cuis-University-Installer/CuisUniversity-5510.image!
+
+
+----QUIT----(26 October 2022 08:07:28) CuisUniversity-5510.image priorSource: 7154921!
+
+----STARTUP---- (8 November 2022 17:15:16) as /home/clinux01/Descargas/linux64/CuisUniversity-5510.image!
+
+
+----End fileIn of /home/clinux01/Descargas/TusLibrosREST Ejercicio it4.st----!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/System/Collections-CompactArrays.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/Features/Compression.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/Features/Sound.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/Features/Cryptography-DigitalSignatures.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/Features/Identities-UUID.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/linux64/Packages/System/Network-Kernel.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/WebClient.pck.st----!
+
+----End fileIn of /home/clinux01/Descargas/TusLibros-Tests Ejercicio it4.st----!
+
+----End fileIn of /home/clinux01/Descargas/TusLibros-Model Ejercicio it4.st----!
+
+----End fileIn of /home/clinux01/Descargas/TusLibrosREST Ejercicio it4.st----!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:21:28'!
+PASSED!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'Simon 11/8/2022 17:23:12' prior: 50594619!
+bookPerformance: anItem
+
+	| bookPerformance totalMoney totalSales readySemaphore |
+
+	bookPerformance := Dictionary new.
+	
+	readySemaphore := Semaphore new.
+	
+	[totalSales := self totalSalesOf: anItem. readySemaphore signal] fork.
+	
+	totalMoney := self totalMoneyRaisedBy: anItem.
+	readySemaphore wait. 
+	
+	bookPerformance at: 'quantity' put: totalSales.
+	bookPerformance at: 'total' put: totalMoney.
+	bookPerformance at: 'summary' put: anItem,' was selled ',totalSales asString, ' times and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^bookPerformance
+	
+
+! !
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:23:18'!
+PASSED!
+
+Object subclass: #AsyncExecution 
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Tests'!
+
+!classDefinition: #AsyncExecution category: 'TusLibros-Tests' stamp: 'Simon 11/8/2022 17:28:06'!
+Object subclass: #AsyncExecution
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Tests'!
+!AsyncExecution methodsFor: 'no messages' stamp: 'Simon 11/8/2022 17:28:11'!
+doThis: aBlockClosure1 whileWaitingDo: aBlockClosure2
+	
+	| readySemaphore |
+	readySemaphore := Semaphore new.
+	
+	[aBlockClosure1 value. readySemaphore signal] fork.
+	
+	aBlockClosure2 value.
+	readySemaphore wait. 
+
+! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'Simon 11/8/2022 17:29:33' prior: 50595503!
+bookPerformance: anItem
+
+	| bookPerformance totalMoney totalSales readySemaphore asyncExecution |
+
+	bookPerformance := Dictionary new.
+	
+	asyncExecution := AsyncExecution new.
+	
+	[totalSales := self totalSalesOf: anItem. readySemaphore signal] fork.
+	
+	totalMoney := self totalMoneyRaisedBy: anItem.
+	readySemaphore wait. 
+	
+	bookPerformance at: 'quantity' put: totalSales.
+	bookPerformance at: 'total' put: totalMoney.
+	bookPerformance at: 'summary' put: anItem,' was selled ',totalSales asString, ' times and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^bookPerformance
+	
+
+! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'Simon 11/8/2022 17:30:25' prior: 50595550!
+bookPerformance: anItem
+
+	| bookPerformance totalMoney totalSales asyncExecution |
+
+	bookPerformance := Dictionary new.
+	
+	asyncExecution := AsyncExecution new.
+	asyncExecution doThis: [totalSales := self totalSalesOf: anItem] whileWaitingDo: [totalMoney := self totalMoneyRaisedBy: anItem.].	
+
+	bookPerformance at: 'quantity' put: totalSales.
+	bookPerformance at: 'total' put: totalMoney.
+	bookPerformance at: 'summary' put: anItem,' was selled ',totalSales asString, ' times and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^bookPerformance
+	
+
+! !
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:30:36'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:30:37'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:30:39'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:30:39'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:30:41'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'Simon 11/8/2022 17:31:25' prior: 50594660!
+storePerformance
+
+	| totalMoney totalSales performance asyncExecution |
+	
+	performance := Dictionary new.
+	
+	asyncExecution := AsyncExecution new.
+	asyncExecution doThis: [totalSales := self totalSales.] whileWaitingDo: [totalMoney := self totalMoneyRaised.].	
+	
+	
+	
+	
+	performance at: 'quantity' put: totalSales.
+	performance at: 'total' put: totalMoney.
+	performance at: 'summary' put: 'The store selled a total of ',totalSales asString, ' books and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^performance
+	
+
+! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'Simon 11/8/2022 17:31:29' prior: 50595687!
+storePerformance
+
+	| totalMoney totalSales performance asyncExecution |
+	
+	performance := Dictionary new.
+	
+	asyncExecution := AsyncExecution new.
+	asyncExecution doThis: [totalSales := self totalSales.] whileWaitingDo: [totalMoney := self totalMoneyRaised.].	
+	
+	performance at: 'quantity' put: totalSales.
+	performance at: 'total' put: totalMoney.
+	performance at: 'summary' put: 'The store selled a total of ',totalSales asString, ' books and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^performance
+	
+
+! !
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'Simon 11/8/2022 17:31:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:31:35'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'Simon 11/8/2022 17:31:36'!
+PASSED!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 17:43:42' prior: 50595186!
+addToCart
+
+	| cartId bookIsbn |
+
+	[ (self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.
+		self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)] ] fork.! !
+
+WebServer reset " <--- Desactiva al servidor REST."!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 17:44:11' prior: 50595820!
+addToCart
+
+	| cartId bookIsbn |
+
+	 (self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.
+		self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)]  ! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+WebServer reset " <--- Desactiva al servidor REST."!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosServerRestInterface methodsFor: 'rest interface' stamp: 'Simon 11/8/2022 17:46:25' prior: 50595355!
+createCart: aRequest
+
+	| clientId password |
+
+	(Delay forSeconds: 5) wait.
+	
+	self withFieldsOf: aRequest do: [ :requestFields |
+		clientId := self clientIdFrom: requestFields.
+		password := self passwordFrom: requestFields ].
+	
+	self 
+		answer: [ | cartId | 
+			cartId := systemFacade createCartFor: clientId authenticatedWith: password.
+			cartId printString ]
+		to: aRequest ! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+WebServer reset " <--- Desactiva al servidor REST."!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosServerRestInterface methodsFor: 'rest interface' stamp: 'Simon 11/8/2022 17:46:51' prior: 50595858!
+createCart: aRequest
+
+	| clientId password |
+
+	(Delay forSeconds: 1) wait.
+	
+	self withFieldsOf: aRequest do: [ :requestFields |
+		clientId := self clientIdFrom: requestFields.
+		password := self passwordFrom: requestFields ].
+	
+	self 
+		answer: [ | cartId | 
+			cartId := systemFacade createCartFor: clientId authenticatedWith: password.
+			cartId printString ]
+		to: aRequest ! !
+
+WebServer reset " <--- Desactiva al servidor REST."!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosServerRestInterface methodsFor: 'rest interface' stamp: 'Simon 11/8/2022 17:47:42' prior: 50595880!
+createCart: aRequest
+
+	| clientId password |
+
+	(Delay forSeconds: 1) wait.
+	
+	self withFieldsOf: aRequest do: [ :requestFields |
+		clientId := self clientIdFrom: requestFields.
+		password := self passwordFrom: requestFields ].
+	
+	self 
+		answer: [ | cartId | 
+			cartId := systemFacade createCartFor: clientId authenticatedWith: password.
+			cartId printString ]
+		to: aRequest ! !
+
+Object subclass: #TusLibrosClientTestWindowModel
+	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+
+!classDefinition: #TusLibrosClientTestWindowModel category: 'TusLibrosREST' stamp: 'Simon 11/8/2022 17:48:16'!
+Object subclass: #TusLibrosClientTestWindowModel
+	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+
+----SNAPSHOT----(8 November 2022 17:48:23) CuisUniversity-5510.image priorSource: 7155150!
+
+----STARTUP---- (8 November 2022 17:48:28) as /home/clinux01/Descargas/linux64/CuisUniversity-5510.image!
+
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+WebServer reset " <--- Desactiva al servidor REST."!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+
+installForDefaultSystem!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+!TusLibrosServerRestInterface class methodsFor: 'installation' stamp: 'Simon 11/8/2022 17:49:00' prior: 50595467!
+installForDefaultSystem
+
+	"self installForDefaultSystem"
+	
+	| server port interface |
+	
+	interface := self on: self defaultSystem.
+	
+	"Esto es para poder acceder a la interface de manera global - Hernan"
+	Smalltalk at: #CurrentTusLibrosRestInterface put: interface.
+	
+	port := 9991.
+	server := WebServer reset default.
+	server listenOn: port.
+	server 
+		addService: '/createCart' 
+		action: [:request | interface createCart: request ].
+	server 
+		addService: '/addToCart' 
+		action: [:request | interface addToCart: request ].
+	server
+		addService: '/listCart' 
+		action: [:request | interface listCart: request ].
+	server
+		addService: '/checkOutCart' 
+		action: [:request | interface checkOutCart: request ].
+	server
+		addService: '/listPurchases' 
+		action: [:request | interface listPurchases: request ].
+	server useDebugErrorHandler ! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+WebServer reset " <--- Desactiva al servidor REST."!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosServerRestInterface class methodsFor: 'installation' stamp: 'Simon 11/8/2022 17:49:31' prior: 50595951!
+installForDefaultSystem
+
+	"self installForDefaultSystem"
+	
+	| server port interface |
+	
+	interface := self on: self defaultSystem.
+	
+	"Esto es para poder acceder a la interface de manera global - Hernan"
+	Smalltalk at: #CurrentTusLibrosRestInterface put: interface.
+	
+	port := 9999.
+	server := WebServer reset default.
+	server listenOn: port.
+	server 
+		addService: '/createCart' 
+		action: [:request | interface createCart: request ].
+	server 
+		addService: '/addToCart' 
+		action: [:request | interface addToCart: request ].
+	server
+		addService: '/listCart' 
+		action: [:request | interface listCart: request ].
+	server
+		addService: '/checkOutCart' 
+		action: [:request | interface checkOutCart: request ].
+	server
+		addService: '/listPurchases' 
+		action: [:request | interface listPurchases: request ].
+	server useDebugErrorHandler ! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 17:50:22' prior: 50595839!
+addToCart
+
+	| cartId bookIsbn |
+
+	[ (self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.
+		self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)]  ] fork.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 17:51:06' prior: 50595199!
+createCart
+
+	| newCartId |
+	
+	[ newCartId := restInterface createCartFor: 'hernan' password: 'smalltalk'.
+	cartIds add: newCartId.
+	self triggerEvent: #newCartIdArrived ] fork.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 17:51:14' prior: 50595208!
+listCart
+
+	| cartId |
+	
+	[ (self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		currentSelectedCartContent := restInterface listCart: cartId.
+		self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId ]. ] fork.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 17:55:07' prior: 50596047!
+listCart
+
+	| cartId |
+	
+	[ (self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		currentSelectedCartContent := restInterface listCart: cartId.
+		self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId ]. ] fork! !
+
+Object subclass: #AsyncExecution
+	instanceVariableNames: 'cartIdWaitingList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+
+!classDefinition: #AsyncExecution category: 'TusLibrosREST' stamp: 'Simon 11/8/2022 17:55:39'!
+Object subclass: #AsyncExecution
+	instanceVariableNames: 'cartIdWaitingList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!AsyncExecution methodsFor: 'initialize' stamp: 'Simon 11/8/2022 17:56:33' overrides: 16920235!
+initialize
+	cartIdWaitingList := Dictionary new.! !
+
+!classDefinition: #AsyncExecution category: 'TusLibrosREST' stamp: 'Simon 11/8/2022 17:56:41'!
+Object subclass: #AsyncExecution
+	instanceVariableNames: 'cartIDWaitingList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!AsyncExecution methodsFor: 'as yet unclassified' stamp: 'Simon 11/8/2022 17:56:41' prior: 50596083 overrides: 16920235!
+initialize
+	cartIDWaitingList := Dictionary new.! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:00:28'!
+doThis: aBlockClosure1 forThisCart: aCartID
+	
+	
+	| cartIDSemaphore |
+	cartIDSemaphore := cartIDWaitingList at: aCartID ifAbsent: [(Semaphore new) signal; yourself.].
+	
+	
+	[cartIDSemaphore wait. aBlockClosure1 value. cartIDSemaphore signal] fork.
+	
+	
+
+! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:00:32' prior: 50596102!
+doThis: aBlockClosure1 forThisCart: aCartID
+	
+	
+	| cartIDSemaphore |
+	cartIDSemaphore := cartIDWaitingList at: aCartID ifAbsent: [(Semaphore new) signal; yourself.].
+	
+	[cartIDSemaphore wait. aBlockClosure1 value. cartIDSemaphore signal] fork.
+	
+	
+
+! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:00:53' prior: 50596114!
+doThis: aBlockClosure forThisCart: aCartID
+	
+	
+	| cartIDSemaphore |
+	cartIDSemaphore := cartIDWaitingList at: aCartID ifAbsent: [(Semaphore new) signal; yourself.].
+	
+	[cartIDSemaphore wait. aBlockClosure value. cartIDSemaphore signal] fork.
+	
+	
+
+! !
+
+!classDefinition: #TusLibrosClientTestWindowModel category: 'TusLibrosREST' stamp: 'Simon 11/8/2022 18:03:00'!
+Object subclass: #TusLibrosClientTestWindowModel
+	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface async'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:03:08' prior: 50596023!
+addToCart
+
+	| cartId bookIsbn |
+	
+	
+	
+	[ (self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		
+		async doThis: [restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.] forThisCart: cartId.
+		
+		self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)]  ] fork.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:03:17' prior: 50596148!
+addToCart
+
+	| cartId bookIsbn |
+	
+	
+	
+	[ (self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		
+		async doThis: [restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.] forThisCart: cartId.
+		
+		self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)]  ] fork.! !
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'Simon 11/8/2022 18:04:46' prior: 50595228 overrides: 16920235!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	async := AsyncExecution new.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:08:18' prior: 50596037!
+createCart
+
+	| newCartId |
+	
+	[ 
+	newCartId := restInterface createCartFor: 'hernan' password: 'smalltalk'.
+	cartIds add: newCartId.
+	self triggerEvent: #newCartIdArrived ] fork.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:08:38' prior: 50596059!
+listCart
+
+	| cartId |
+	
+	[ (self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		currentSelectedCartContent := restInterface listCart: cartId.
+		self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId ]. ] fork! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:09:08' prior: 50596201!
+listCart
+
+	| cartId |
+	
+	[ (self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		currentSelectedCartContent := restInterface listCart: cartId.
+		self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId ]. ] fork! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:11:55'!
+doThis: aBlockClosure1 whenFinished: aBlockClosure2
+	
+	| readySemaphore |
+	readySemaphore := Semaphore new.
+	
+	[aBlockClosure1 value. readySemaphore signal] fork.
+	
+	readySemaphore wait. 
+	aBlockClosure2 value.
+
+! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:13:52' prior: 50596191!
+createCart
+
+	| newCartId |
+	
+
+	async doThis: [newCartId := restInterface createCartFor: 'hernan' password: 'smalltalk'.] whenFinished: [ :response | 
+		cartIds add: response.
+		self triggerEvent: #newCartIdArrived].
+	! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:14:51' prior: 50596235!
+createCart
+
+	| newCartId |
+	
+
+	async doThis: [newCartId := restInterface createCartFor: 'hernan' password: 'smalltalk'.] whenFinished: [ 
+		cartIds add: newCartId.
+		self triggerEvent: #newCartIdArrived].
+	! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:16:18' prior: 50596213!
+listCart
+
+	| cartId |
+	
+	(self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		async doThis: [currentSelectedCartContent := restInterface listCart: cartId.] whenFinished: [ 
+			self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId 
+			].
+		
+		] ! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:16:20' prior: 50596257!
+listCart
+
+	| cartId |
+	
+	(self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		async doThis: [currentSelectedCartContent := restInterface listCart: cartId.] whenFinished: [ 
+			self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId 
+			].
+		] ! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open " <--- Abre la interfaz gráfica de pruebas."!
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:19:26' prior: 50595540!
+doThis: aBlockClosure1 whileWaitingDo: aBlockClosure2
+	
+	| readySemaphore |
+	readySemaphore := Semaphore new.
+	
+	[aBlockClosure1 value. readySemaphore signal.
+		
+		
+		] fork.
+	
+	aBlockClosure2 value.
+	readySemaphore wait. 
+
+! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:19:34' prior: 50596288!
+doThis: aBlockClosure1 whileWaitingDo: aBlockClosure2
+	
+	| readySemaphore |
+	readySemaphore := Semaphore new.
+	
+	[aBlockClosure1 value. readySemaphore signal.] fork.
+	
+	aBlockClosure2 value.
+	readySemaphore wait. 
+
+! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:19:46' prior: 50596224!
+doThis: aBlockClosure1 whenFinished: aBlockClosure2
+	
+	| readySemaphore |
+	readySemaphore := Semaphore new.
+	
+	[aBlockClosure1 value. readySemaphore signal.
+	readySemaphore wait. aBlockClosure2 value.] fork.
+	
+	
+
+! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:20:06' prior: 50596309!
+doThis: aBlockClosure1 whenFinished: aBlockClosure2
+	
+	| readySemaphore |
+	readySemaphore := Semaphore new.
+	
+	[aBlockClosure1 value.  aBlockClosure2 value.] fork.
+	
+	
+
+! !
+!AsyncExecution methodsFor: 'assync behaviour' stamp: 'Simon 11/8/2022 18:20:15' prior: 50596319!
+doThis: aBlockClosure1 whenFinished: aBlockClosure2
+	
+	[aBlockClosure1 value.  aBlockClosure2 value.] fork.
+	
+	
+
+! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:22:58' prior: 50596270!
+listCart
+
+	| cartId |
+	
+	(self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		async doThis: [currentSelectedCartContent := restInterface listCart: cartId. self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId .] forThisCart: cartId..
+		] ! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'Simon 11/8/2022 18:23:00' prior: 50596336!
+listCart
+
+	| cartId |
+	
+	(self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		async doThis: [currentSelectedCartContent := restInterface listCart: cartId. self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId .] forThisCart: cartId.
+		] ! !
+
+TusLibrosServerRestInterface installForDefaultSystem " <--- Levanta un servidor REST para escuchar pedidos."!
+
+TusLibrosClientTestWindow open  "<--- Abre la interfaz gráfica de pruebas."!
+
+----SNAPSHOT----(8 November 2022 18:25:06) CuisUniversity-5510.image priorSource: 8457110!
+
+----SNAPSHOT----(8 November 2022 18:28:50) CuisUniversity-5510.image priorSource: 8470892!
